@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="js/auth-guard.js" data-role="Admin"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Printify | Dashboard</title>
+
+    <link rel="icon" type="image/png" href="image/printify_logo.png">
+    <link rel="shortcut icon" type="image/png" href="image/printify_logo.png">
+
+    <link rel="stylesheet" href="css/dashboard.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Reusable Printify alert helper -->
+    <script src="js/printify-alert.js" defer></script>
+
+    <!-- Dashboard scripts -->
+    <script src="js/dashboard.js" defer></script>
+    <script src="js/dashboard-staff-orders.js" defer></script>
+    <script src="js/dashboard-live.js" defer></script>
+</head>
+
+<body class="sidebar-hidden">
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-header">
+            <a href="dashboard.html" class="logo">
+                <div class="logo-icon">
+                    <img src="image/printify_logo.png" alt="Printify Logo">
+                </div>
+                <span>Printify</span>
+            </a>
+        </div>
+
+        <div class="sidebar-label">MAIN MENU</div>
+
+        <nav class="sidebar-navigation">
+
+            <a href="dashboard.html" class="nav-link active">
+                <img class="menu-icon" src="image/dashboard_icon.png" alt="">
+                <span>Dashboard</span>
+            </a>
+
+            <a href="orders.html" class="nav-link">
+                <img class="menu-icon" src="image/order_icon.png" alt="">
+                <span>Orders</span>
+            </a>
+
+            <a href="inventory.html" class="nav-link">
+                <img class="menu-icon" src="image/inventory_icon.png" alt="">
+                <span>Inventory</span>
+            </a>
+
+            <a href="staff-management.html" class="nav-link">
+                <img class="menu-icon" src="image/staff_icon.png" alt="">
+                <span>Staff Management</span>
+            </a>
+
+            <a href="staff-tracking.html" class="nav-link">
+                <img class="menu-icon" src="image/stafftracking_icon.png" alt="">
+                <span>Staff Tracking</span>
+            </a>
+
+            <a href="reports.html" class="nav-link">
+                <img class="menu-icon" src="image/reports_icon.png" alt="">
+                <span>Reports</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-label settings-label">PREFERENCES</div>
+
+        <nav class="sidebar-navigation">
+            <a href="settings.html" class="nav-link">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </a>
+        </nav>
+
+        <!-- SIDEBAR LOGOUT -->
+        <div class="sidebar-footer">
+            <button
+                type="button"
+                class="sidebar-logout-button"
+                id="sidebarLogoutButton"
+            >
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Log Out</span>
+            </button>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content" id="mainContent">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button
+                    class="icon-button menu-button"
+                    id="menuToggle"
+                    type="button"
+                    aria-label="Toggle sidebar"
+                    title="Toggle sidebar"
+                >
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div class="page-heading">
+                    <h1>Dashboard</h1>
+                    <p>Welcome back! Here's what's happening today.</p>
+                </div>
+
+            </div>
+
+            <div class="topbar-right">
+
+                <div class="current-date" id="currentDate">
+                    <i class="fa-regular fa-calendar"></i>
+                    <span>Loading date...</span>
+                </div>
+
+                <button
+                    class="icon-button theme-toggle"
+                    id="themeToggle"
+                    type="button"
+                    aria-label="Switch to dark mode"
+                    title="Switch to dark mode"
+                >
+                    <img
+                        src="image/lightmode_icon.png"
+                        id="themeIcon"
+                        alt="Light mode"
+                        class="theme-image-icon"
+                    >
+                </button>
+
+                <button
+                    class="icon-button notification-button"
+                    id="notificationButton"
+                    type="button"
+                    aria-label="Notifications"
+                    title="Notifications"
+                >
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="notification-dot" id="notificationDot"></span>
+                </button>
+
+                <div class="profile-container">
+
+                    <button
+                        class="profile-button"
+                        id="profileButton"
+                        type="button"
+                        aria-expanded="false"
+                    >
+                        <div class="profile-avatar">AD</div>
+
+                        <div class="profile-information">
+                            <strong>Administrator</strong>
+                            <span>Admin Account</span>
+                        </div>
+
+                        <i class="fa-solid fa-chevron-down profile-arrow"></i>
+                    </button>
+
+                    <div class="profile-dropdown" id="profileDropdown">
+
+                        <div class="dropdown-profile">
+                            <div class="profile-avatar">AD</div>
+
+                            <div>
+                                <strong>Administrator</strong>
+                                <span>Admin Account</span>
+                            </div>
+                        </div>
+
+                        <a href="settings.html">
+                            <i class="fa-solid fa-gear"></i>
+                            <span>Settings</span>
+                        </a>
+
+                        <button
+                            type="button"
+                            id="logoutButton"
+                            class="logout-button"
+                        >
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            <span>Log Out</span>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- BREADCRUMB -->
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+
+            <a href="dashboard.html" aria-label="Home">
+                <i class="fa-solid fa-house"></i>
+            </a>
+
+            <i
+                class="fa-solid fa-chevron-right breadcrumb-separator"
+                aria-hidden="true"
+            ></i>
+
+            <span class="breadcrumb-current" aria-current="page">
+                Dashboard
+            </span>
+
+        </nav>
+
+
+        <!-- DASHBOARD CONTENT -->
+        <section class="dashboard-content">
+
+            <div class="content-introduction">
+
+                <div>
+                    <h2>Overview</h2>
+                    <p>Monitor your printing shop's performance and activities.</p>
+                </div>
+
+                <div class="dashboard-status">
+                    <span class="status-indicator"></span>
+                    System Overview
+                </div>
+
+            </div>
+
+
+            <!-- SUMMARY CARDS -->
+            <div class="stats-grid">
+
+                <!-- TOTAL CUSTOMERS -->
+                <a
+                    href="orders.html"
+                    class="stat-card-link"
+                    aria-label="View customer-related orders"
+                    title="View customer-related orders"
+                >
+                    <article class="stat-card customers-card">
+
+                        <div class="stat-card-top">
+                            <div class="stat-icon customers-icon">
+                                <img src="image/user_icon.png" alt="Customers">
+                            </div>
+                        </div>
+
+                        <div class="stat-card-bottom">
+
+                            <div>
+                                <h3 id="totalCustomers">0</h3>
+                                <p>Total Customers</p>
+                            </div>
+
+                            <div class="stat-decoration customers-decoration">
+                                <img src="image/user_icon2.png" alt="">
+                            </div>
+
+                        </div>
+
+                    </article>
+                </a>
+
+
+                <!-- TOTAL ORDERS -->
+                <a
+                    href="orders.html"
+                    class="stat-card-link"
+                    aria-label="View all orders"
+                    title="View all orders"
+                >
+                    <article class="stat-card orders-card">
+
+                        <div class="stat-card-top">
+                            <div class="stat-icon orders-icon">
+                                <img src="image/order_icon.png" alt="Orders">
+                            </div>
+                        </div>
+
+                        <div class="stat-card-bottom">
+
+                            <div>
+                                <h3 id="totalOrders">0</h3>
+                                <p>Total Orders</p>
+                            </div>
+
+                            <div class="stat-decoration orders-decoration">
+                                <img src="image/order_icon2.png" alt="">
+                            </div>
+
+                        </div>
+
+                    </article>
+                </a>
+
+
+                <!-- TOTAL SALES -->
+                <a
+                    href="reports.html"
+                    class="stat-card-link"
+                    aria-label="View sales reports"
+                    title="View sales reports"
+                >
+                    <article class="stat-card sales-card">
+
+                        <div class="stat-card-top">
+                            <div class="stat-icon sales-icon">
+                                <img src="image/money_icon.png" alt="Revenue">
+                            </div>
+                        </div>
+
+                        <div class="stat-card-bottom">
+
+                            <div>
+                                <h3 id="totalSales">₱0.00</h3>
+                                <p>Total Sales</p>
+                            </div>
+
+                            <div class="stat-decoration sales-decoration">
+                                <img src="image/revenue_icon2.png" alt="">
+                            </div>
+
+                        </div>
+
+                    </article>
+                </a>
+
+
+                <!-- TOTAL STAFF -->
+                <a
+                    href="staff-management.html"
+                    class="stat-card-link"
+                    aria-label="Manage staff"
+                    title="Manage staff"
+                >
+                    <article class="stat-card staff-card">
+
+                        <div class="stat-card-top">
+                            <div class="stat-icon staff-icon">
+                                <img src="image/team_icon.png" alt="Staff">
+                            </div>
+                        </div>
+
+                        <div class="stat-card-bottom">
+
+                            <div>
+                                <h3 id="totalStaff">0</h3>
+                                <p>Total Staff</p>
+                            </div>
+
+                            <div class="stat-decoration staff-decoration">
+                                <img src="image/team_icno2.png" alt="">
+                            </div>
+
+                        </div>
+
+                    </article>
+                </a>
+
+            </div>
+
+
+            <!-- STAFF SUMMARY -->
+            <div class="section-heading">
+
+                <div>
+                    <h2>Staff Overview</h2>
+                    <p>Monitor your team's work status.</p>
+                </div>
+
+                <a href="staff-tracking.html" class="text-link">
+                    View Staff Tracking
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+
+            <div class="staff-summary-grid">
+
+                <!-- CURRENTLY WORKING -->
+                <a
+                    href="staff-tracking.html"
+                    class="staff-summary-link"
+                    aria-label="View currently working staff"
+                    title="View currently working staff"
+                >
+                    <article class="staff-summary-card">
+
+                        <div class="summary-icon working-icon">
+                            <img src="image/working_icon.png" alt="Currently Working">
+                        </div>
+
+                        <div class="summary-information">
+                            <p>Currently Working</p>
+                            <h3 id="currentlyWorking">0</h3>
+
+                            <span class="summary-note">
+                                Staff currently on duty
+                            </span>
+                        </div>
+
+                        <span class="summary-status working-status">
+                            Active
+                        </span>
+
+                    </article>
+                </a>
+
+
+                <!-- COMPLETED STAFF WORK -->
+                <a
+                    href="staff-tracking.html"
+                    class="staff-summary-link"
+                    aria-label="View completed staff work"
+                    title="View completed staff work"
+                >
+                    <article class="staff-summary-card">
+
+                        <div class="summary-icon completed-icon">
+                            <img src="image/completed_icon.png" alt="Completed">
+                        </div>
+
+                        <div class="summary-information">
+                            <p>Completed Staff Work</p>
+                            <h3 id="completedStaffWork">0</h3>
+
+                            <span class="summary-note">
+                                Recorded completed tasks
+                            </span>
+                        </div>
+
+                        <span class="summary-status completed-status">
+                            Completed
+                        </span>
+
+                    </article>
+                </a>
+
+            </div>
+
+
+            <!-- CHART AND INVENTORY -->
+            <div class="dashboard-grid">
+
+                <!-- SALES OVERVIEW -->
+                <section class="panel sales-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <h2>Sales Overview</h2>
+                            <p>Review your shop's sales performance.</p>
+                        </div>
+
+                        <div class="chart-filter-container">
+
+                            <label for="salesPeriod" class="visually-hidden">
+                                Sales period
+                            </label>
+
+                           <select id="salesPeriod" class="chart-filter">
+                            <option value="daily">Daily</option>
+                            <option value="weekly" selected>Weekly</option>
+                            <option value="monthly">Monthly</option>
+                            <option value="yearly">Yearly</option>
+
+                        </select>
+                        </div>
+
+                    </div>
+
+                    <div class="chart-container">
+                        <canvas id="salesChart"></canvas>
+                    </div>
+
+                </section>
+
+
+                <!-- LOW STOCK ITEMS -->
+                <section class="panel inventory-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <h2>Low Stock Items</h2>
+                            <p>Items that need attention.</p>
+                        </div>
+
+                        <span class="low-stock-count" id="lowStockCount">
+                            0 Items
+                        </span>
+
+                    </div>
+
+                    <div class="low-stock-list" id="lowStockList"></div>
+
+                    <a href="inventory.html" class="panel-footer-link">
+                        View All Inventory
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                </section>
+
+            </div>
+
+
+            <!-- ORDERS PER STAFF -->
+            <section
+                class="panel staff-records-panel"
+                id="staffOrdersPanel"
+                style="margin-bottom: 24px;"
+            >
+
+                <div class="panel-header">
+
+                    <div>
+                        <h2>Orders per Staff</h2>
+
+                        <p id="staffOrdersSubtitle">
+                            How many orders each staff member has received.
+                        </p>
+                    </div>
+
+                    <a href="staff-management.html" class="text-link">
+                        Manage Staff
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+                <div class="table-wrapper">
+
+                    <table class="staff-table">
+
+                        <thead>
+                            <tr>
+                                <th>Staff Member</th>
+                                <th>Staff ID</th>
+                                <th>Orders Received</th>
+                                <th>Pending</th>
+                                <th>In Progress</th>
+                                <th>Completed</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="staffOrdersBody">
+                            <tr>
+                                <td colspan="6">
+                                    Loading staff records...
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- RECENT TRANSACTIONS -->
+            <section
+                class="panel staff-records-panel"
+                style="margin-bottom: 24px;"
+            >
+
+                <div class="panel-header">
+
+                    <div>
+                        <h2>Recent Transactions</h2>
+                        <p>The latest orders recorded in the database.</p>
+                    </div>
+
+                    <a href="orders.html" class="text-link">
+                        View All Orders
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+                <div class="table-wrapper">
+
+                    <table class="staff-table">
+
+                        <thead>
+                            <tr>
+                                <th>Order</th>
+                                <th>Customer</th>
+                                <th>Service</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Payment</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="recentOrdersBody">
+                            <tr>
+                                <td colspan="6">
+                                    Loading transactions...
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- RECENT SYSTEM ACTIVITY -->
+            <section class="panel staff-records-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h2>Recent System Activity</h2>
+                        <p>Latest actions recorded in the audit log.</p>
+                    </div>
+
+                    <a href="staff-tracking.html" class="text-link">
+                        View All
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+                <div class="table-wrapper">
+
+                    <table class="staff-table">
+
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Role</th>
+                                <th>Action</th>
+                                <th>Details</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="staffRecordsBody">
+                            <tr>
+                                <td colspan="5">
+                                    Loading activity...
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- FOOTER -->
+            <footer class="dashboard-footer">
+
+                <p>
+                    © <span id="currentYear"></span> Printify.
+                    Printing Shop Tracking and Inventory System.
+                </p>
+
+            </footer>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

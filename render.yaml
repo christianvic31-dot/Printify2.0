@@ -1,0 +1,32 @@
+databases:
+  - name: printify-db
+    databaseName: printifydb
+    user: printify
+    plan: free
+    region: singapore
+    ipAllowList: []
+
+services:
+  - type: web
+    name: printify
+    runtime: docker
+    region: singapore
+    plan: free
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
+    healthCheckPath: /
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ASPNETCORE_URLS
+        value: http://0.0.0.0:10000
+      - key: ConnectionStrings__Default
+        fromDatabase:
+          name: printify-db
+          property: connectionString
+      - key: Smtp__Host
+        value: smtp.gmail.com
+      - key: Smtp__Port
+        value: "587"
+      # Set Smtp__Username, Smtp__FromEmail, and Smtp__AppPassword
+      # privately in the Render dashboard. Never commit credentials.

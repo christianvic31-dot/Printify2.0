@@ -1,0 +1,22 @@
+PRINTIFY FUNCTIONAL COMPANION - BACKEND + UPDATED FRONTEND
+
+This project merges the ASP.NET Core backend/Render config from Printify-main (3)(3).zip with the complete latest frontend from Printify_Main(final)(5).zip.
+Protected login.html, js/login.js and css/style.css are retained from the hosting base.
+
+BACKEND PATCHES:
+- Orders and inventory now have ArchivedAt timestamp columns.
+- DELETE /api/orders/{id} and DELETE /api/inventory/{id} soft-archive instead of permanently deleting.
+- GET /api/orders/archived, POST /api/orders/{id}/restore, DELETE /api/orders/{id}/permanent.
+- GET /api/inventory/archived, POST /api/inventory/{id}/restore, DELETE /api/inventory/{id}/permanent.
+- Admin-only access on archive endpoints; Staff still sees assigned orders only.
+- DB bootstrap adds columns using ALTER TABLE ... ADD COLUMN IF NOT EXISTS.
+- Fixed missing forgot-password CSS and dark-mode icon aliases.
+
+KNOWN LIMITATIONS:
+- The updated frontend includes browser-local archive storage in orders.js and inventory.js. It may not fully synchronize with backend archive endpoints without further frontend integration.
+- Staff-management archive behavior has NOT been changed.
+- No .NET SDK or PostgreSQL instance was available in this environment: C# compile, runtime and DB migration are NOT verified.
+- Do NOT deploy without a DB backup and testing of login, Admin/Staff permissions, CRUD, archive/restore, and QR attendance.
+
+LOCAL RUN: From Printify root: dotnet run --project Backend/PrintifyBackend.csproj
+Set ConnectionStrings__Default and SMTP credentials in secure environment variables (not in Git).

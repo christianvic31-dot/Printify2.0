@@ -1,0 +1,21 @@
+@baseUrl = https://192.168.8.42:3002
+@staffCode = STF-001
+@staffSessionCookie = replace-with-staff-session-cookie
+
+### Record attendance from the signed-in staff member's QR code
+POST {{baseUrl}}/api/staff/me/attendance/qr-scan
+Content-Type: application/json
+Cookie: printify_session={{staffSessionCookie}}
+
+{
+  "staffCode": "{{staffCode}}"
+}
+
+### A different staff member's QR code is rejected
+POST {{baseUrl}}/api/staff/me/attendance/qr-scan
+Content-Type: application/json
+Cookie: printify_session={{staffSessionCookie}}
+
+{
+  "staffCode": "STF-002"
+}

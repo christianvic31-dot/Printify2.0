@@ -1,0 +1,106 @@
+/* PRINTIFY STAFF SETTINGS — matching My Orders */
+/* These rules are scoped to Settings; they do not modify other staff pages. */
+body:has(.settings-page-content) {
+    --settings-panel: rgba(5, 30, 15, .94);
+    --settings-border: rgba(255,255,255,.17);
+    --settings-text: #ffffff;
+    --settings-muted: #c9dbce;
+    --settings-accent: #19e51b;
+}
+body:has(.settings-page-content) .sidebar {
+    background: #082b17 !important;
+    border: 1px solid rgba(255,255,255,.28) !important;
+}
+body:has(.settings-page-content) .sidebar .logo,
+body:has(.settings-page-content) .sidebar .logo span,
+body:has(.settings-page-content) .sidebar .nav-link,
+body:has(.settings-page-content) .sidebar .nav-link span,
+body:has(.settings-page-content) .sidebar-account strong,
+body:has(.settings-page-content) .sidebar-account span {
+    color: #fff !important;
+    opacity: 1 !important;
+}
+body:has(.settings-page-content) .sidebar-label { color: #a9bcb0 !important; }
+body:has(.settings-page-content) .sidebar .nav-link.active,
+body:has(.settings-page-content) .sidebar .nav-link.active span,
+body:has(.settings-page-content) .sidebar .nav-link.active i {
+    background: #19e51b !important;
+    color: #06200d !important;
+}
+body:has(.settings-page-content) .sidebar .nav-link.active { box-shadow: 0 6px 22px rgba(25,229,27,.14); }
+body:has(.settings-page-content) .sidebar-footer,
+body:has(.settings-page-content) .sidebar-footer span { color: #a9bcb0 !important; opacity: 1 !important; }
+body:has(.settings-page-content) .sidebar-logout { color: #ff9696 !important; }
+body:has(.settings-page-content) .settings-brand-logo { width: 45px; height: 45px; object-fit: contain; margin-right: 10px; }
+body:has(.settings-page-content) .sidebar .logo { display: flex; align-items: center; }
+body:has(.settings-page-content) .settings-nav-icon { width: 22px; margin-right: 10px; color: #a5b9ab; text-align: center; }
+body:has(.settings-page-content) .topbar {
+    background: #092b18 !important;
+    border: 1px solid rgba(255,255,255,.25) !important;
+    border-radius: 20px;
+}
+body:has(.settings-page-content) .topbar h1,
+body:has(.settings-page-content) .topbar p,
+body:has(.settings-page-content) #currentDate { color: #fff !important; }
+body:has(.settings-page-content) .topbar p { color: #d3dfd5 !important; }
+.settings-page-content { display: grid; gap: 22px; }
+.settings-breadcrumb {
+    display: inline-flex; align-items: center; gap: 12px; width: fit-content;
+    padding: 14px 18px; border-radius: 12px;
+    background: rgba(4, 22, 12, .96); border: 1px solid var(--settings-border);
+    font-size: 13px; font-weight: 700; color: #fff !important;
+}
+.settings-breadcrumb a { color: #19e51b !important; text-decoration: none; }
+.settings-breadcrumb span { color: #fff !important; }
+.settings-breadcrumb i { color: #a6b9ab !important; font-size: 11px; }
+.settings-page-content .content-introduction h2 { color: #fff !important; }
+.settings-page-content .content-introduction p { color: #e0eae2 !important; }
+.settings-section-badge { display: inline-flex; align-items: center; gap: 9px; color: #fff !important; font-size: 12px; font-weight: 700; }
+.settings-section-badge i, .settings-footer i { color: #19e51b; font-size: 9px; }
+.settings-page-content .settings-panel {
+    background: var(--settings-panel) !important;
+    border: 1px solid var(--settings-border) !important;
+    border-radius: 19px !important;
+    padding: 26px !important;
+    color: #fff !important;
+    box-shadow: 0 12px 32px rgba(0,0,0,.14);
+}
+.settings-panel-heading { margin-bottom: 24px; }
+.settings-panel-heading h2 { color: #fff !important; font-size: 18px; margin: 0 0 7px; }
+.settings-panel-heading h2 i { color: #19e51b; margin-right: 8px; }
+.settings-panel-heading p { color: #c9dbce !important; margin: 0; font-size: 13px; }
+.settings-page-content .staff-page-field label { color: #f4fff5 !important; font-weight: 700; }
+.settings-page-content .staff-page-field input,
+.settings-page-content .staff-page-field select {
+    background: rgba(255,255,255,.09) !important;
+    border: 1px solid rgba(255,255,255,.22) !important;
+    color: #fff !important;
+    border-radius: 11px;
+    min-height: 46px;
+    color-scheme: dark;
+}
+.settings-page-content .staff-page-field select option { background: #123821; color: #fff; }
+.settings-page-content .staff-page-field input:focus,
+.settings-page-content .staff-page-field select:focus { outline: 2px solid #19e51b; outline-offset: 1px; }
+.settings-page-content .staff-page-button {
+    background: #19e51b !important; color: #08210c !important;
+    border-radius: 11px; font-weight: 800; min-height: 46px;
+}
+.settings-page-content .staff-page-button:disabled { opacity: .55; }
+.settings-page-content .staff-page-message { color: #d3dfd5 !important; }
+.settings-page-content .staff-page-message.error { color: #ff9b9b !important; }
+.settings-page-content .staff-page-message.success { color: #70ff8d !important; }
+.settings-footer { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; color: #d5dfd7; font-size: 12px; padding: 8px 3px 22px; }
+/* Keep the dark-green My Orders appearance in both themes, with legible text. */
+body:not(.dark-mode):has(.settings-page-content) .sidebar .logo span,
+body:not(.dark-mode):has(.settings-page-content) .sidebar .nav-link:not(.active),
+body:not(.dark-mode):has(.settings-page-content) .sidebar .nav-link:not(.active) span,
+body:not(.dark-mode):has(.settings-page-content) .sidebar-account strong,
+body:not(.dark-mode):has(.settings-page-content) .sidebar-account span,
+body:not(.dark-mode):has(.settings-page-content) .settings-breadcrumb span,
+body:not(.dark-mode):has(.settings-page-content) .settings-panel-heading h2 { color: #fff !important; }
+@media (max-width: 700px) {
+    .settings-page-content .settings-panel { padding: 18px !important; }
+    .settings-section-badge { display: none; }
+    .settings-footer { flex-direction: column; }
+}

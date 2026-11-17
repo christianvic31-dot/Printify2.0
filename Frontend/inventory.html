@@ -1,0 +1,903 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="js/auth-guard.js" data-role="Admin"></script>
+
+    <title>Printify | Inventory</title>
+
+    <link rel="icon" type="image/png" href="image/printify_logo.png">
+
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/inventory.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/printify-alert.js" defer></script>
+    <script src="js/inventory.js" defer></script>
+
+    <style>
+        /* DASHBOARD SIDEBAR DESIGN */
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            padding: 25px 17px;
+            transition:
+                transform .35s ease,
+                opacity .3s ease,
+                visibility .3s ease,
+                background .3s ease;
+        }
+
+        .sidebar.is-hidden {
+            transform: translateX(-120%);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            padding-top: 25px;
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        .sidebar-logout-button {
+            width: 100%;
+            min-height: 47px;
+            padding: 12px 14px;
+
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            color: #ff9292;
+            background: rgba(255, 75, 75, 0.08);
+
+            border: 1px solid rgba(255, 100, 100, 0.16);
+            border-radius: 12px;
+
+            font-size: 12px;
+            font-weight: 700;
+            text-align: left;
+
+            transition: all .25s ease;
+        }
+
+        .sidebar-logout-button i {
+            width: 20px;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        .sidebar-logout-button:hover {
+            color: #ffffff;
+            background: rgba(255, 75, 75, 0.18);
+            border-color: rgba(255, 100, 100, 0.40);
+            transform: translateX(3px);
+        }
+
+        .main-content {
+            transition: margin-left .35s ease, width .35s ease;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .sidebar,
+            .main-content,
+            .sidebar-logout-button {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="sidebar-hidden">
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-header">
+            <a href="dashboard.html" class="logo">
+                <div class="logo-icon">
+                    <img src="image/printify_logo.png" alt="Printify Logo">
+                </div>
+                <span>Printify</span>
+            </a>
+        </div>
+
+        <div class="sidebar-label">MAIN MENU</div>
+
+        <nav class="sidebar-navigation">
+
+            <a href="dashboard.html" class="nav-link">
+                <img src="image/dashboard_icon.png"
+                     class="menu-icon" alt="">
+                <span>Dashboard</span>
+            </a>
+
+            <a href="orders.html" class="nav-link">
+                <img src="image/order_icon.png"
+                     class="menu-icon" alt="">
+                <span>Orders</span>
+            </a>
+
+            <a href="inventory.html" class="nav-link active">
+                <img src="image/inventory_icon.png"
+                     class="menu-icon" alt="">
+                <span>Inventory</span>
+            </a>
+
+            <a href="staff-management.html" class="nav-link">
+                <img src="image/staff_icon.png"
+                     class="menu-icon" alt="">
+                <span>Staff Management</span>
+            </a>
+
+            <a href="staff-tracking.html" class="nav-link">
+                <img src="image/stafftracking_icon.png"
+                     class="menu-icon" alt="">
+                <span>Staff Tracking</span>
+            </a>
+
+            <a href="reports.html" class="nav-link">
+                <img src="image/reports_icon.png"
+                     class="menu-icon" alt="">
+                <span>Reports</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-label settings-label">
+            PREFERENCES
+        </div>
+
+        <nav class="sidebar-navigation">
+            <a href="settings.html" class="nav-link">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </a>
+        </nav>
+
+        <!-- DASHBOARD LOGOUT -->
+        <div class="sidebar-footer">
+            <button type="button"
+                    class="sidebar-logout-button"
+                    id="sidebarLogoutButton">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Log Out</span>
+            </button>
+        </div>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content" id="mainContent">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button type="button"
+                        class="icon-button menu-button"
+                        id="menuToggle"
+                        aria-label="Toggle sidebar"
+                        aria-controls="sidebar"
+                        aria-expanded="false">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div class="page-heading">
+                    <h1>Inventory</h1>
+                    <p>Manage printing materials and product stocks.</p>
+                </div>
+
+            </div>
+
+            <div class="topbar-right">
+
+                <div class="current-date" id="currentDate">
+                    <i class="fa-regular fa-calendar"></i>
+                    <span>Loading date...</span>
+                </div>
+
+                <button type="button"
+                        class="icon-button theme-toggle"
+                        id="themeToggle"
+                        aria-label="Switch theme">
+                    <img src="image/lightmode_icon.png"
+                         id="themeIcon"
+                         class="theme-image-icon"
+                         alt="Theme">
+                </button>
+
+                <button type="button"
+                        class="icon-button notification-button"
+                        id="notificationButton"
+                        aria-label="Notifications">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="notification-dot"></span>
+                </button>
+
+                <div class="profile-container">
+
+                    <button type="button"
+                            class="profile-button"
+                            id="profileButton"
+                            aria-expanded="false">
+
+                        <div class="profile-avatar">AD</div>
+
+                        <div class="profile-information">
+                            <strong>Administrator</strong>
+                            <span>Admin Account</span>
+                        </div>
+
+                        <i class="fa-solid fa-chevron-down profile-arrow"></i>
+                    </button>
+
+                    <div class="profile-dropdown" id="profileDropdown">
+
+                        <div class="dropdown-profile">
+                            <div class="profile-avatar">AD</div>
+                            <div>
+                                <strong>Administrator</strong>
+                                <span>Admin Account</span>
+                            </div>
+                        </div>
+
+                        <a href="settings.html">
+                            <i class="fa-solid fa-gear"></i>
+                            <span>Settings</span>
+                        </a>
+
+                        <button type="button"
+                                id="logoutButton"
+                                class="logout-button">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            <span>Log Out</span>
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- INVENTORY CONTENT -->
+        <section class="dashboard-content inventory-content">
+
+            <!-- BREADCRUMB -->
+            <nav class="breadcrumb"
+                 aria-label="Breadcrumb"
+                 style="margin:0 0 24px 0;">
+
+                <a href="dashboard.html">
+                    <span>Dashboard</span>
+                </a>
+
+                <i class="fa-solid fa-chevron-right breadcrumb-separator"></i>
+
+                <span class="breadcrumb-current"
+                      aria-current="page">
+                    Inventory
+                </span>
+            </nav>
+
+            <!-- INVENTORY PANEL -->
+            <section class="panel inventory-table-panel">
+
+                <div class="inventory-panel-heading">
+
+                    <div>
+                        <h2 id="inventoryHeading">
+                            Product Inventory
+                        </h2>
+                        <p id="inventorySubtitle">
+                            Monitor product quantities and stock levels.
+                        </p>
+                    </div>
+
+                    <div class="inventory-header-actions">
+
+                        <span class="order-record-count"
+                              id="inventoryRecordCount">
+                            0 records
+                        </span>
+
+                        <button type="button"
+                                class="secondary-button"
+                                id="toggleArchivedButton">
+                            <i class="fa-solid fa-box-archive"></i>
+                            Archived Products
+                        </button>
+
+                        <button type="button"
+                                class="primary-button"
+                                id="addProductButton">
+                            <i class="fa-solid fa-plus"></i>
+                            Add Product
+                        </button>
+
+                    </div>
+                </div>
+
+                <!-- SEARCH AND FILTERS -->
+                <div class="inventory-toolbar">
+
+                    <div class="inventory-search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="search"
+                               id="searchInput"
+                               placeholder="Search product name or ID...">
+                    </div>
+
+                    <div class="inventory-filters">
+
+                        <div class="filter-field">
+                            <label for="categoryFilter">Category</label>
+                            <select id="categoryFilter">
+                                <option value="all">All Categories</option>
+                                <option value="Paper">Paper</option>
+                                <option value="Ink">Ink</option>
+                                <option value="Printing Supplies">Printing Supplies</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-field">
+                            <label for="stockFilter">Stock Status</label>
+                            <select id="stockFilter">
+                                <option value="all">All Status</option>
+                                <option value="In Stock">In Stock</option>
+                                <option value="Low Stock">Low Stock</option>
+                                <option value="Out of Stock">Out of Stock</option>
+                            </select>
+                        </div>
+
+                        <button type="button"
+                                class="secondary-button"
+                                id="resetFiltersButton">
+                            <i class="fa-solid fa-rotate-left"></i>
+                            Reset
+                        </button>
+
+                    </div>
+                </div>
+
+                <!-- ACTIVE PRODUCTS TABLE -->
+                <div class="table-wrapper inventory-table-wrapper"
+                     id="activeTableWrapper">
+
+                    <table class="staff-table inventory-table">
+                        <thead>
+                            <tr>
+                                <th>PRODUCT</th>
+                                <th>CATEGORY</th>
+                                <th>QUANTITY</th>
+                                <th>UNIT PRICE</th>
+                                <th>STOCK STATUS</th>
+                                <th>ACTIONS</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="inventoryTableBody"></tbody>
+                    </table>
+                </div>
+
+                <!-- ARCHIVED PRODUCTS TABLE -->
+                <div class="table-wrapper inventory-table-wrapper"
+                     id="archivedTableWrapper"
+                     hidden>
+
+                    <table class="staff-table inventory-table">
+                        <thead>
+                            <tr>
+                                <th>PRODUCT</th>
+                                <th>CATEGORY</th>
+                                <th>QUANTITY</th>
+                                <th>UNIT PRICE</th>
+                                <th>ARCHIVED DATE</th>
+                                <th>ACTIONS</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="archivedInventoryTableBody"></tbody>
+                    </table>
+                </div>
+
+                <!-- TABLE FOOTER -->
+                <div class="inventory-table-footer">
+
+                    <span id="resultsCount">
+                        Showing 0 products
+                    </span>
+
+                    <div class="inventory-export-actions">
+
+                        <button type="button"
+                                class="secondary-button"
+                                id="exportCsvButton">
+                            <i class="fa-solid fa-file-csv"></i>
+                            Export CSV
+                        </button>
+
+                        <button type="button"
+                                class="secondary-button"
+                                id="exportExcelButton">
+                            <i class="fa-solid fa-file-excel"></i>
+                            Export Excel
+                        </button>
+
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- FOOTER -->
+            <footer class="dashboard-footer">
+                <p>
+                    © <span id="currentYear"></span> Printify.
+                    Printing Shop Tracking and Inventory System.
+                </p>
+                <span>Manage smarter. Print better.</span>
+            </footer>
+
+        </section>
+    </main>
+
+    <!-- ADD / EDIT PRODUCT MODAL -->
+    <div class="inventory-modal-overlay"
+         id="productModal"
+         aria-hidden="true">
+
+        <section class="inventory-modal"
+                 role="dialog"
+                 aria-modal="true"
+                 aria-labelledby="modalTitle">
+
+            <div class="inventory-modal-header">
+
+                <div>
+                    <h2 id="modalTitle">Add Product</h2>
+                    <p id="modalDescription">
+                        Enter the printing material details.
+                    </p>
+                </div>
+
+                <button type="button"
+                        class="modal-close-button"
+                        id="closeModalButton"
+                        aria-label="Close modal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <form id="productForm">
+
+                <input type="hidden" id="productId">
+
+                <div class="inventory-form-grid">
+
+                    <div class="inventory-form-group">
+                        <label for="productName">
+                            Product Name *
+                        </label>
+                        <input type="text"
+                               id="productName"
+                               maxlength="80"
+                               required
+                               placeholder="e.g. A4 Bond Paper">
+                    </div>
+
+                    <div class="inventory-form-group">
+                        <label for="productCategory">
+                            Category *
+                        </label>
+                        <select id="productCategory" required>
+                            <option value="">Select Category</option>
+                            <option value="Paper">Paper</option>
+                            <option value="Ink">Ink</option>
+                            <option value="Printing Supplies">Printing Supplies</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="inventory-form-group">
+                        <label for="productQuantity">
+                            Quantity *
+                        </label>
+                        <input type="number"
+                               id="productQuantity"
+                               min="0"
+                               step="1"
+                               required>
+                    </div>
+
+                    <div class="inventory-form-group">
+                        <label for="productUnit">
+                            Unit *
+                        </label>
+                        <select id="productUnit" required>
+                            <option value="">Select Unit</option>
+                            <option value="pcs">Pieces</option>
+                            <option value="reams">Reams</option>
+                            <option value="bottles">Bottles</option>
+                            <option value="packs">Packs</option>
+                            <option value="rolls">Rolls</option>
+                            <option value="boxes">Boxes</option>
+                            <option value="sets">Sets</option>
+                        </select>
+                    </div>
+
+                    <div class="inventory-form-group">
+                        <label for="productPrice">
+                            Unit Price (₱) *
+                        </label>
+                        <input type="number"
+                               id="productPrice"
+                               min="0"
+                               step="0.01"
+                               required>
+                    </div>
+
+                    <div class="inventory-form-group">
+                        <label for="lowStockThreshold">
+                            Low Stock Threshold *
+                        </label>
+                        <input type="number"
+                               id="lowStockThreshold"
+                               min="0"
+                               step="1"
+                               value="10"
+                               required>
+                    </div>
+
+                </div>
+
+                <div class="inventory-modal-actions">
+
+                    <button type="button"
+                            class="secondary-button"
+                            id="cancelModalButton">
+                        Cancel
+                    </button>
+
+                    <button type="submit"
+                            class="primary-button"
+                            id="saveProductButton">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        Save Product
+                    </button>
+
+                </div>
+            </form>
+        </section>
+    </div>
+
+    <!-- VIEW PRODUCT MODAL -->
+    <div class="inventory-modal-overlay"
+         id="viewProductModal"
+         aria-hidden="true">
+
+        <section class="inventory-modal view-modal"
+                 role="dialog"
+                 aria-modal="true"
+                 aria-labelledby="viewModalTitle">
+
+            <div class="inventory-modal-header">
+
+                <div>
+                    <h2 id="viewModalTitle">Product Details</h2>
+                    <p>View complete product information.</p>
+                </div>
+
+                <button type="button"
+                        class="modal-close-button"
+                        id="closeViewModalButton"
+                        aria-label="Close product details">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="product-detail-grid"
+                 id="productDetailsContent"></div>
+
+            <div class="inventory-modal-actions">
+                <button type="button"
+                        class="secondary-button"
+                        id="closeViewButton">
+                    Close
+                </button>
+            </div>
+
+        </section>
+    </div>
+
+    <!-- CONFIRMATION MODAL -->
+    <div class="inventory-modal-overlay"
+         id="confirmationModal"
+         aria-hidden="true">
+
+        <section class="inventory-modal confirmation-modal"
+                 role="alertdialog"
+                 aria-modal="true"
+                 aria-labelledby="confirmationTitle">
+
+            <div class="confirmation-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+
+            <h2 id="confirmationTitle">Confirm Action</h2>
+
+            <p id="confirmationMessage">
+                Are you sure you want to continue?
+            </p>
+
+            <div class="inventory-modal-actions">
+
+                <button type="button"
+                        class="secondary-button"
+                        id="cancelConfirmationButton">
+                    Cancel
+                </button>
+
+                <button type="button"
+                        class="primary-button"
+                        id="confirmActionButton">
+                    Confirm
+                </button>
+
+            </div>
+        </section>
+    </div>
+
+    <!-- NOTIFICATION TOAST -->
+    <div class="inventory-toast"
+         id="toastMessage"
+         role="status"
+         aria-live="polite">
+        <i class="fa-solid fa-circle-check"></i>
+        <span id="toastText"></span>
+    </div>
+
+    <!-- DASHBOARD-STYLE SIDEBAR CONTROLLER -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            "use strict";
+
+            const body = document.body;
+            const sidebar = document.getElementById("sidebar");
+            const overlay = document.getElementById("sidebarOverlay");
+            const menuToggle = document.getElementById("menuToggle");
+
+            const sidebarLogout =
+                document.getElementById("sidebarLogoutButton");
+
+            const profileLogout =
+                document.getElementById("logoutButton");
+
+            const mobileScreen =
+                window.matchMedia("(max-width: 850px)");
+
+            let logoutInProgress = false;
+
+            // SIDEBAR ANIMATION
+            function setSidebarState(isOpen, save = true) {
+                if (!sidebar) return;
+
+                sidebar.classList.toggle("is-hidden", !isOpen);
+                body.classList.toggle("sidebar-hidden", !isOpen);
+
+                if (overlay) {
+                    overlay.classList.toggle(
+                        "show",
+                        isOpen && mobileScreen.matches
+                    );
+                }
+
+                if (menuToggle) {
+                    menuToggle.setAttribute(
+                        "aria-expanded",
+                        String(isOpen)
+                    );
+                }
+
+                if (save) {
+                    try {
+                        localStorage.setItem(
+                            "printify-sidebar-hidden",
+                            String(!isOpen)
+                        );
+                    } catch (error) {
+                        console.warn(error);
+                    }
+                }
+            }
+
+            function initializeSidebar() {
+                let isHidden = true;
+
+                try {
+                    const saved = localStorage.getItem(
+                        "printify-sidebar-hidden"
+                    );
+
+                    if (saved !== null) {
+                        isHidden = saved === "true";
+                    }
+                } catch (error) {
+                    console.warn(error);
+                }
+
+                setSidebarState(
+                    mobileScreen.matches ? false : !isHidden,
+                    false
+                );
+            }
+
+            if (menuToggle) {
+                menuToggle.addEventListener("click", function () {
+                    const isOpen =
+                        !sidebar.classList.contains("is-hidden");
+
+                    setSidebarState(!isOpen);
+                });
+            }
+
+            if (overlay) {
+                overlay.addEventListener("click", function () {
+                    setSidebarState(false);
+                });
+            }
+
+            function handleScreenChange() {
+                if (mobileScreen.matches) {
+                    setSidebarState(false, false);
+                } else {
+                    initializeSidebar();
+                }
+            }
+
+            if (mobileScreen.addEventListener) {
+                mobileScreen.addEventListener(
+                    "change",
+                    handleScreenChange
+                );
+            } else {
+                mobileScreen.addListener(handleScreenChange);
+            }
+
+            initializeSidebar();
+
+            // DATE AND YEAR
+            const currentDate = document.getElementById("currentDate");
+            const currentYear = document.getElementById("currentYear");
+
+            if (currentDate) {
+                const span = currentDate.querySelector("span");
+
+                if (span) {
+                    span.textContent = new Date().toLocaleDateString(
+                        "en-PH",
+                        {
+                            weekday: "long",
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric"
+                        }
+                    );
+                }
+            }
+
+            if (currentYear) {
+                currentYear.textContent = new Date().getFullYear();
+            }
+
+            // LOGOUT CONFIRMATION
+            async function confirmLogout() {
+                if (
+                    window.PrintifyAlert &&
+                    typeof window.PrintifyAlert.confirm === "function"
+                ) {
+                    return window.PrintifyAlert.confirm(
+                        "Log out of Printify?",
+                        "Are you sure you want to end your administrator session?",
+                        "Yes, log out",
+                        "Stay"
+                    );
+                }
+
+                if (window.Swal) {
+                    return window.Swal.fire({
+                        icon: "question",
+                        title: "Log out of Printify?",
+                        text: "Are you sure you want to end your administrator session?",
+                        showCancelButton: true,
+                        confirmButtonText: "Yes, log out",
+                        cancelButtonText: "Stay",
+                        reverseButtons: true
+                    });
+                }
+
+                return {
+                    isConfirmed: window.confirm(
+                        "Are you sure you want to log out?"
+                    )
+                };
+            }
+
+            async function performLogout() {
+                if (logoutInProgress) return;
+
+                const result = await confirmLogout();
+
+                if (!result || !result.isConfirmed) return;
+
+                logoutInProgress = true;
+
+                if (sidebarLogout) sidebarLogout.disabled = true;
+                if (profileLogout) profileLogout.disabled = true;
+
+                try {
+                    if (
+                        window.PrintifyAPI &&
+                        typeof window.PrintifyAPI.logout === "function"
+                    ) {
+                        await window.PrintifyAPI.logout();
+                    } else {
+                        localStorage.removeItem("token");
+                        localStorage.removeItem("accessToken");
+                        localStorage.removeItem("user");
+                        sessionStorage.clear();
+                    }
+
+                    window.location.replace("login.html");
+
+                } catch (error) {
+                    console.error("Logout failed:", error);
+
+                    logoutInProgress = false;
+
+                    if (sidebarLogout) sidebarLogout.disabled = false;
+                    if (profileLogout) profileLogout.disabled = false;
+
+                    if (window.Swal) {
+                        window.Swal.fire({
+                            icon: "error",
+                            title: "Logout failed",
+                            text: "Please try again."
+                        });
+                    } else {
+                        alert("Logout failed. Please try again.");
+                    }
+                }
+            }
+
+            if (sidebarLogout) {
+                sidebarLogout.addEventListener(
+                    "click",
+                    performLogout
+                );
+            }
+
+            if (profileLogout) {
+                profileLogout.addEventListener(
+                    "click",
+                    performLogout
+                );
+            }
+        });
+    </script>
+
+</body>
+</html>

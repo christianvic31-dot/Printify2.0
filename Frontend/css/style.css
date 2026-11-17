@@ -1,0 +1,861 @@
+/* ==========================================
+   PRINTIFY CALAPAN
+   LOGIN PAGE
+   Transparent Liquid Glass Design
+========================================== */
+
+
+/* 1. COLOR VARIABLES */
+
+:root {
+    --logo-green: #19E51B;
+    --logo-hover: #12C918;
+    --forest-green: #173B27;
+    --deep-green: #102A1C;
+    --dark-green: #0C1D14;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    color: #FFFFFF;
+}
+
+
+/* 2. PAGE BACKGROUND */
+
+.login-page {
+    width: 100%;
+    min-height: 100vh;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background: #000000;
+}
+
+.background-image {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+
+    background-image: url("../image/printify_bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    z-index: 0;
+    animation: backgroundZoom 22s ease-in-out infinite alternate;
+}
+
+.background-overlay {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.12);
+
+    z-index: 1;
+    pointer-events: none;
+}
+
+
+/* 3. MAIN CONTAINER */
+
+.login-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 650px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    z-index: 2;
+}
+
+
+/* 4. LEFT BRANDING SECTION */
+
+.image-section {
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+
+    padding: 45px 50px;
+    overflow: hidden;
+}
+
+
+/* 5. BRAND LOGO - NO RECTANGLE BACKGROUND */
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    width: fit-content;
+    padding: 0;
+
+    /* Removed black rectangle */
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+
+    animation: fadeSlideDown 1s ease forwards;
+    transition: transform 0.35s ease;
+}
+
+.brand-logo:hover {
+    background: transparent;
+    transform: translateY(-2px);
+}
+
+
+/* LOGO IMAGE */
+
+.brand-image {
+    width: 65px;
+    height: 65px;
+
+    object-fit: contain;
+    object-position: center;
+    flex-shrink: 0;
+
+    filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.30));
+
+    transition: transform 0.35s ease;
+}
+
+.brand-logo:hover .brand-image {
+    transform: scale(1.06);
+}
+
+
+/* BRAND DETAILS */
+
+.brand-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.brand-title {
+    display: flex;
+    align-items: baseline;
+    gap: 9px;
+}
+
+
+/* PRINTIFY */
+
+.brand-title h1 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: -1.6px;
+    line-height: 1.1;
+    color: #FFFFFF;
+}
+
+
+/* CALAPAN */
+
+.brand-title span {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+    color: var(--logo-green);
+}
+
+
+/* DJJ COMPUTER SHOP */
+
+.brand-details p {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+    color: #FFFFFF;
+    line-height: 1.5;
+}
+
+
+/* 6. RIGHT LOGIN SECTION - TRANSPARENT LIQUID GLASS */
+
+.login-section {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    overflow: hidden;
+
+    /* Transparent glass */
+    background: rgba(10, 24, 16, 0.30);
+
+    backdrop-filter: blur(13px) saturate(135%);
+    -webkit-backdrop-filter: blur(13px) saturate(135%);
+
+    border-left: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 0;
+
+    box-shadow: -15px 0 45px rgba(0, 0, 0, 0.10);
+
+    animation: glassReveal 1.2s ease forwards;
+}
+
+
+/* GLASS REFLECTION */
+
+.login-section::before {
+    content: "";
+    position: absolute;
+
+    top: -25%;
+    right: -15%;
+
+    width: 500px;
+    height: 500px;
+
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.10),
+        transparent 70%
+    );
+
+    pointer-events: none;
+
+    animation: reflectionMove 9s ease-in-out infinite alternate;
+}
+
+.login-section::after {
+    content: "";
+    position: absolute;
+
+    bottom: -30%;
+    left: -20%;
+
+    width: 450px;
+    height: 450px;
+
+    background: radial-gradient(
+        circle,
+        rgba(25, 229, 27, 0.09),
+        transparent 70%
+    );
+
+    pointer-events: none;
+
+    animation: reflectionMove 12s ease-in-out infinite alternate-reverse;
+}
+
+
+/* 7. LOGIN CONTENT */
+
+.glass-panel {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    max-width: 470px;
+
+    padding: 45px 25px;
+
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+
+    animation: fadeSlideUp 1s ease forwards;
+}
+
+
+/* 8. LOGIN HEADER */
+
+.login-header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.login-header h2 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 45px;
+    font-weight: 800;
+    letter-spacing: -1.8px;
+
+    color: var(--logo-green);
+    margin-bottom: 15px;
+
+    text-shadow: 0 3px 15px rgba(0, 0, 0, 0.20);
+}
+
+.login-description {
+    color: rgba(255, 255, 255, 0.86);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* 9. INPUT GROUP */
+
+.input-group {
+    margin-bottom: 27px;
+}
+
+.input-group label {
+    display: block;
+    color: #FFFFFF;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    margin-bottom: 12px;
+}
+
+
+/* 10. INPUT WRAPPER */
+
+.input-wrapper {
+    width: 100%;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+
+    position: relative;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 0;
+
+    transition: 0.3s ease;
+}
+
+.input-wrapper:focus-within {
+    border-bottom-color: var(--logo-green);
+
+    box-shadow: 0 5px 15px rgba(25, 229, 27, 0.12);
+}
+
+.input-wrapper input {
+    width: 100%;
+    height: 100%;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+    color: #FFFFFF;
+
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+
+    padding-right: 40px;
+}
+
+.input-wrapper input::placeholder {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 13px;
+}
+
+
+/* INPUT ICON */
+
+.input-icon {
+    position: absolute;
+    right: 5px;
+
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 17px;
+
+    pointer-events: none;
+}
+
+
+/* 11. PASSWORD TOGGLE */
+
+.password-toggle {
+    position: absolute;
+    right: 5px;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+    color: rgba(255, 255, 255, 0.82);
+
+    font-size: 17px;
+    cursor: pointer;
+
+    transition: 0.3s ease;
+    border-radius: 0;
+}
+
+.password-toggle:hover {
+    color: var(--logo-green);
+    transform: scale(1.1);
+}
+
+
+/* 12. FORM OPTIONS */
+
+.form-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+    margin: 27px 0 35px;
+}
+
+
+/* REMEMBER ME */
+
+.remember-container {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    color: rgba(255, 255, 255, 0.90);
+    font-size: 12px;
+
+    cursor: pointer;
+    user-select: none;
+}
+
+.remember-container input {
+    position: absolute;
+    opacity: 0;
+
+    width: 1px;
+    height: 1px;
+}
+
+.custom-checkbox {
+    width: 17px;
+    height: 17px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.70);
+    background: rgba(255, 255, 255, 0.05);
+
+    border-radius: 0;
+    transition: 0.2s ease;
+}
+
+.remember-container input:checked + .custom-checkbox {
+    background: var(--logo-green);
+    border-color: var(--logo-green);
+}
+
+.remember-container input:checked + .custom-checkbox::after {
+    content: "✓";
+
+    color: #102A1C;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.remember-container input:focus-visible + .custom-checkbox {
+    outline: 2px solid #FFFFFF;
+    outline-offset: 3px;
+}
+
+
+/* FORGOT PASSWORD */
+
+.forgot-link {
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 700;
+
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.forgot-link:hover {
+    color: var(--logo-green);
+}
+
+
+/* 13. ERROR MESSAGE */
+
+.error-message {
+    display: none;
+
+    color: #FFB5B5;
+    font-size: 12px;
+    line-height: 1.5;
+
+    margin-bottom: 15px;
+}
+
+.error-message.show {
+    display: block;
+    animation: fadeSlideUp 0.3s ease;
+}
+
+
+/* 14. LOGIN BUTTON */
+
+.login-button {
+    width: 100%;
+    height: 54px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 13px;
+
+    border: 1px solid var(--logo-green);
+    border-radius: 0;
+
+    background: var(--logo-green);
+    color: #102A1C;
+
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+
+    cursor: pointer;
+    transition: all 0.35s ease;
+
+    position: relative;
+    overflow: hidden;
+
+    box-shadow: 0 7px 22px rgba(25, 229, 27, 0.18);
+}
+
+
+/* BUTTON SHINE */
+
+.login-button::before {
+    content: "";
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(
+        110deg,
+        transparent,
+        rgba(255, 255, 255, 0.38),
+        transparent
+    );
+
+    transition: 0.6s ease;
+}
+
+.login-button:hover::before {
+    left: 120%;
+}
+
+
+/* BUTTON HOVER */
+
+.login-button:hover {
+    background: var(--logo-hover);
+    color: #102A1C;
+
+    border-color: var(--logo-hover);
+
+    box-shadow: 0 10px 30px rgba(25, 229, 27, 0.30);
+
+    transform: translateY(-3px);
+}
+
+.login-button:active {
+    transform: scale(0.98);
+}
+
+.login-button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.login-button i {
+    font-size: 14px;
+    transition: transform 0.3s ease;
+}
+
+.login-button:hover i {
+    transform: translateX(5px);
+}
+
+
+/* 15. REGISTER SECTION */
+
+.register-section {
+    text-align: center;
+    margin-top: 32px;
+}
+
+.register-section p {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 12px;
+}
+
+.register-section a {
+    color: #FFFFFF;
+    font-weight: 800;
+
+    text-decoration: none;
+    margin-left: 4px;
+
+    transition: 0.3s ease;
+}
+
+.register-section a:hover {
+    color: var(--logo-green);
+}
+
+
+/* 16. LOGIN FOOTER */
+
+.login-footer {
+    text-align: center;
+    margin-top: 55px;
+}
+
+.login-footer p {
+    color: rgba(255, 255, 255, 0.70);
+
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+
+/* 17. ANIMATIONS */
+
+@keyframes backgroundZoom {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.07);
+    }
+}
+
+@keyframes glassReveal {
+    from {
+        opacity: 0;
+        transform: translateX(45px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes reflectionMove {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(-35px, 35px);
+    }
+}
+
+
+/* 18. RESPONSIVE DESIGN */
+
+@media (max-width: 1000px) {
+
+    .login-container {
+        grid-template-columns: 42% 58%;
+    }
+
+    .image-section {
+        padding: 35px 25px;
+    }
+
+    .brand-logo {
+        gap: 10px;
+    }
+
+    .brand-image {
+        width: 52px;
+        height: 52px;
+    }
+
+    .brand-title h1 {
+        font-size: 26px;
+    }
+
+    .brand-title span {
+        font-size: 10px;
+    }
+
+    .brand-details p {
+        font-size: 9px;
+        letter-spacing: 1px;
+    }
+
+    .glass-panel {
+        max-width: 430px;
+        padding: 35px 25px;
+    }
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    .login-page {
+        min-height: 100vh;
+        height: auto;
+        overflow-y: auto;
+    }
+
+    .login-container {
+        min-height: 100vh;
+        height: auto;
+        grid-template-columns: 1fr;
+    }
+
+    .image-section {
+        display: none;
+    }
+
+    .login-section {
+        min-height: 100vh;
+        height: auto;
+
+        padding: 35px 15px;
+
+        background: rgba(10, 24, 16, 0.42);
+
+        border-left: none;
+
+        backdrop-filter: blur(13px) saturate(135%);
+        -webkit-backdrop-filter: blur(13px) saturate(135%);
+    }
+
+    .glass-panel {
+        width: 100%;
+        max-width: 440px;
+        padding: 35px 25px;
+    }
+
+    .login-header {
+        margin-bottom: 40px;
+    }
+
+    .login-header h2 {
+        font-size: 36px;
+    }
+
+    .login-footer {
+        margin-top: 45px;
+    }
+}
+
+
+/* SMALL MOBILE */
+
+@media (max-width: 380px) {
+
+    .glass-panel {
+        padding: 25px 15px;
+    }
+
+    .login-header h2 {
+        font-size: 30px;
+    }
+
+    .form-options {
+        align-items: flex-start;
+    }
+
+    .remember-container,
+    .forgot-link {
+        font-size: 10px;
+    }
+
+    .login-footer p {
+        font-size: 9px;
+    }
+}
+
+
+/* BROWSER FALLBACK */
+
+@supports not (backdrop-filter: blur(13px)) {
+
+    .login-section {
+        background: rgba(10, 24, 16, 0.88);
+    }
+}
+
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}

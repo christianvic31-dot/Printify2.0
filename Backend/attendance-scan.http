@@ -1,0 +1,20 @@
+@baseUrl = https://192.168.8.42:3002
+@sessionCookie = replace-with-admin-session-cookie
+
+### Scan a valid Staff ID QR code (requires an Admin session)
+POST {{baseUrl}}/api/staff/attendance/scan
+Content-Type: application/json
+Cookie: printify_session={{sessionCookie}}
+
+{
+  "staffCode": "STF-001"
+}
+
+### Unknown Staff ID returns 404
+POST {{baseUrl}}/api/staff/attendance/scan
+Content-Type: application/json
+Cookie: printify_session={{sessionCookie}}
+
+{
+  "staffCode": "STF-999"
+}

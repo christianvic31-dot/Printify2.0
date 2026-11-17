@@ -1,0 +1,814 @@
+
+/* ==========================================
+   PRINTIFY INVENTORY
+   ORDERS-MATCHED DARK GREEN DESIGN
+========================================== */
+
+.inventory-content {
+    --green: #19e51b;
+    --green-hover: #39f43b;
+    --panel: rgba(7, 31, 17, .94);
+    --border: rgba(255, 255, 255, .16);
+    --muted: #b6c4b9;
+    --text: #f6fff7;
+    --input: rgba(255, 255, 255, .09);
+    color: var(--text);
+}
+
+/* BREADCRUMB */
+
+.inventory-breadcrumb {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 17px;
+    margin-bottom: 25px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: rgba(5, 20, 11, .95);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.inventory-breadcrumb a {
+    color: var(--green);
+    text-decoration: none;
+}
+
+.inventory-breadcrumb > i {
+    color: #a8b8ab;
+    font-size: 10px;
+}
+
+/* MAIN INVENTORY PANEL */
+
+.inventory-content .inventory-table-panel {
+    padding: 25px;
+    border: 1px solid var(--border);
+    border-radius: 21px;
+    background: var(--panel);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, .24);
+}
+
+.inventory-panel-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.inventory-panel-heading h2 {
+    margin: 0 0 8px;
+    color: #fff;
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.inventory-panel-heading p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.inventory-header-actions,
+.inventory-export-actions {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    flex-wrap: wrap;
+}
+
+.inventory-content .order-record-count {
+    padding: 11px 14px;
+    border: 1px solid rgba(25, 229, 27, .25);
+    border-radius: 30px;
+    background: rgba(25, 229, 27, .10);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+/* BUTTONS */
+
+.inventory-content .primary-button,
+.inventory-modal .primary-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 9px;
+    min-height: 41px;
+    padding: 0 17px;
+    border: 1px solid rgba(25, 229, 27, .55);
+    border-radius: 10px;
+    background: var(--green, #19e51b);
+    color: #071608;
+    font-size: 11px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.inventory-content .primary-button:hover,
+.inventory-modal .primary-button:hover {
+    background: #42f542;
+    transform: translateY(-1px);
+}
+
+.inventory-content .secondary-button,
+.inventory-modal .secondary-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 9px;
+    min-height: 41px;
+    padding: 0 16px;
+    border: 1px solid rgba(255, 255, 255, .19);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, .10);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.inventory-content .secondary-button:hover,
+.inventory-modal .secondary-button:hover {
+    background: rgba(25, 229, 27, .12);
+    border-color: rgba(25, 229, 27, .50);
+}
+
+/* SEARCH AND FILTERS */
+
+.inventory-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.inventory-search {
+    position: relative;
+    flex: 1;
+}
+
+.inventory-search i {
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    transform: translateY(-50%);
+    color: #c1d0c4;
+    font-size: 13px;
+}
+
+.inventory-search input {
+    width: 100%;
+    height: 43px;
+    padding: 0 16px 0 43px;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    outline: none;
+    background: var(--input);
+    color: white;
+    font-size: 11px;
+}
+
+.inventory-search input::placeholder {
+    color: #a8b8ab;
+}
+
+.inventory-filters {
+    display: flex;
+    align-items: end;
+    gap: 12px;
+}
+
+.filter-field label {
+    display: block;
+    margin-bottom: 8px;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.filter-field select {
+    min-width: 135px;
+    height: 43px;
+    padding: 0 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: #213d2b;
+    color: white;
+    font-size: 11px;
+    outline: none;
+    cursor: pointer;
+}
+
+.inventory-search input:focus,
+.filter-field select:focus {
+    border-color: #19e51b;
+    box-shadow: 0 0 0 3px rgba(25, 229, 27, .10);
+}
+
+/* TABLE */
+
+.inventory-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.inventory-table {
+    width: 100%;
+    min-width: 850px;
+    border-collapse: collapse;
+}
+
+.inventory-table thead {
+    background: #234d2e;
+}
+
+.inventory-table th {
+    padding: 16px 12px;
+    text-align: left;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.inventory-table td {
+    padding: 15px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, .10);
+    color: #fff;
+    font-size: 11px;
+    vertical-align: middle;
+}
+
+.inventory-table tbody tr:hover {
+    background: rgba(25, 229, 27, .06);
+}
+
+.inventory-product {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.inventory-product-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #19e51b;
+    color: #071608;
+    font-size: 14px;
+}
+
+.inventory-product-details strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 11px;
+}
+
+.inventory-product-details small {
+    color: #b7c5b9;
+    font-size: 10px;
+}
+
+.product-id {
+    color: #19e51b;
+    font-weight: 800;
+}
+
+.price-value {
+    color: #19e51b;
+    font-weight: 800;
+}
+
+.inventory-status {
+    display: inline-block;
+    padding: 8px 11px;
+    border-radius: 30px;
+    font-size: 10px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.inventory-status.in-stock {
+    background: rgba(25, 229, 27, .15);
+    color: #6af77b;
+}
+
+.inventory-status.low-stock {
+    background: rgba(255, 195, 64, .16);
+    color: #ffd16b;
+}
+
+.inventory-status.out-of-stock {
+    background: rgba(255, 88, 88, .16);
+    color: #ff9898;
+}
+
+.inventory-actions {
+    display: flex;
+    gap: 7px;
+}
+
+.inventory-actions button {
+    display: grid;
+    place-items: center;
+    width: 35px;
+    height: 35px;
+    border: 1px solid rgba(255, 255, 255, .20);
+    border-radius: 9px;
+    background: rgba(255, 255, 255, .09);
+    color: white;
+    cursor: pointer;
+}
+
+.inventory-actions button:hover {
+    border-color: #19e51b;
+    background: rgba(25, 229, 27, .12);
+}
+
+.inventory-actions .archive-action {
+    color: #ff8585;
+    border-color: rgba(255, 90, 90, .35);
+}
+
+.inventory-actions .restore-action {
+    color: #69f59b;
+}
+
+.inventory-table-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-top: 19px;
+    color: #e0e9e2;
+    font-size: 11px;
+}
+
+.inventory-note {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 18px;
+    margin-top: 19px;
+    border: 1px solid rgba(25, 229, 27, .20);
+    border-radius: 12px;
+    background: rgba(25, 229, 27, .07);
+}
+
+.inventory-note > i {
+    color: #19e51b;
+    font-size: 22px;
+}
+
+.inventory-note strong {
+    font-size: 12px;
+}
+
+.inventory-note p {
+    margin: 5px 0 0;
+    color: #b8c8bc;
+    font-size: 11px;
+}
+
+/* ==========================================
+   MODAL BACKGROUND BLUR
+========================================== */
+
+.inventory-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 5000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+    overflow-y: auto;
+
+    background: rgba(0, 0, 0, .67);
+
+    backdrop-filter: blur(17px) brightness(.60);
+    -webkit-backdrop-filter: blur(17px) brightness(.60);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: opacity .25s ease, visibility .25s ease;
+}
+
+.inventory-modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+body.inventory-modal-open {
+    overflow: hidden;
+}
+
+/* MODAL CONTAINER */
+
+.inventory-modal {
+    width: 100%;
+    max-width: 610px;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+
+    padding: 27px;
+    border: 1px solid rgba(255, 255, 255, .23);
+    border-radius: 21px;
+
+    background: linear-gradient(
+        145deg,
+        rgba(16, 47, 28, .99),
+        rgba(7, 25, 15, .99)
+    );
+
+    color: #fff;
+
+    box-shadow: 0 25px 85px rgba(0, 0, 0, .55);
+
+    transform: translateY(18px) scale(.97);
+    transition: transform .25s ease;
+}
+
+.inventory-modal-overlay.show .inventory-modal {
+    transform: translateY(0) scale(1);
+}
+
+.inventory-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, .13);
+}
+
+.inventory-modal-header h2 {
+    margin: 0 0 8px;
+    font-size: 22px;
+}
+
+.inventory-modal-header p {
+    margin: 0;
+    color: #b7c7ba;
+    font-size: 12px;
+}
+
+.modal-close-button {
+    display: grid;
+    place-items: center;
+
+    width: 35px;
+    height: 35px;
+
+    border: 1px solid rgba(255, 255, 255, .20);
+    border-radius: 10px;
+
+    background: rgba(255, 255, 255, .10);
+    color: white;
+
+    cursor: pointer;
+}
+
+.modal-close-button:hover {
+    background: rgba(255, 80, 80, .17);
+    color: #ff9999;
+}
+
+/* FORM */
+
+.inventory-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.inventory-form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.inventory-form-group input,
+.inventory-form-group select {
+    width: 100%;
+    height: 43px;
+
+    padding: 0 13px;
+
+    border: 1px solid rgba(255, 255, 255, .18);
+    border-radius: 10px;
+
+    background: #1c3a28;
+    color: #fff;
+
+    font-size: 12px;
+    outline: none;
+}
+
+.inventory-form-group input:focus,
+.inventory-form-group select:focus {
+    border-color: #19e51b;
+    box-shadow: 0 0 0 3px rgba(25, 229, 27, .10);
+}
+
+.inventory-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 26px;
+}
+
+/* VIEW PRODUCT */
+
+.product-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.product-detail-item {
+    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, .13);
+    border-radius: 11px;
+    background: rgba(255, 255, 255, .06);
+}
+
+.product-detail-item span {
+    display: block;
+    margin-bottom: 8px;
+    color: #b6c6b9;
+    font-size: 11px;
+}
+
+.product-detail-item strong {
+    color: #fff;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+/* CONFIRMATION */
+
+.confirmation-modal {
+    max-width: 420px;
+    text-align: center;
+}
+
+.confirmation-icon {
+    margin: 5px 0 20px;
+    color: #ffc45e;
+    font-size: 38px;
+}
+
+.confirmation-modal h2 {
+    margin: 0 0 13px;
+    font-size: 21px;
+}
+
+.confirmation-modal p {
+    color: #bdcec0;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.confirmation-modal .inventory-modal-actions {
+    justify-content: center;
+}
+
+/* TOAST */
+
+.inventory-toast {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    z-index: 6000;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 15px 20px;
+
+    border: 1px solid rgba(25, 229, 27, .4);
+    border-radius: 12px;
+
+    background: #10311d;
+    color: #8aff98;
+
+    font-size: 12px;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px);
+    transition: .25s ease;
+}
+
+.inventory-toast.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* IMPORTANT: HIDDEN ELEMENTS */
+
+.inventory-content [hidden],
+.inventory-modal-overlay[hidden] {
+    display: none !important;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1100px) {
+    .inventory-toolbar {
+        flex-wrap: wrap;
+    }
+
+    .inventory-search {
+        flex-basis: 100%;
+    }
+
+    .inventory-panel-heading {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 700px) {
+    .inventory-content .inventory-table-panel {
+        padding: 16px;
+    }
+
+    .inventory-header-actions {
+        width: 100%;
+    }
+
+    .inventory-filters {
+        flex-wrap: wrap;
+    }
+
+    .inventory-form-grid,
+    .product-detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .inventory-modal {
+        padding: 20px;
+    }
+
+    .inventory-table-footer {
+        flex-wrap: wrap;
+    }
+}
+
+/* ==========================================
+   PRINTIFY INVENTORY MODAL BLUR
+   Same effect as Notifications popup
+========================================== */
+
+.inventory-modal-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw;
+    height: 100dvh;
+
+    z-index: 99999 !important;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+    overflow-y: auto;
+
+    /* Dark blurred background */
+    background: rgba(0, 0, 0, 0.62) !important;
+
+    backdrop-filter: blur(10px) brightness(0.65) !important;
+    -webkit-backdrop-filter: blur(10px) brightness(0.65) !important;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease;
+}
+
+/* Show modal */
+.inventory-modal-overlay.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+}
+
+/* Modal stays sharp and clear */
+.inventory-modal {
+    position: relative;
+    z-index: 1;
+
+    width: 100%;
+    max-width: 610px;
+    max-height: calc(100dvh - 40px);
+    overflow-y: auto;
+
+    padding: 28px;
+
+    background: linear-gradient(
+        145deg,
+        rgba(8, 32, 17, 0.99),
+        rgba(5, 24, 12, 0.99)
+    ) !important;
+
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 23px;
+
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.55);
+
+    color: white;
+
+    transform: translateY(15px) scale(0.97);
+    transition: transform 0.25s ease;
+}
+
+.inventory-modal-overlay.show .inventory-modal {
+    transform: translateY(0) scale(1);
+}
+
+/* Archive confirmation popup */
+.confirmation-modal {
+    max-width: 460px;
+    text-align: center;
+}
+
+/* View product popup */
+.view-modal {
+    max-width: 580px;
+}
+
+/* Prevent page scrolling */
+body.inventory-modal-open {
+    overflow: hidden !important;
+}
+
+/* Ensure hidden modal is not clickable */
+.inventory-modal-overlay:not(.show) {
+    pointer-events: none !important;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .inventory-modal {
+        padding: 20px;
+        border-radius: 17px;
+    }
+}
+
+
+/* ==========================================
+   PRINTIFY INVENTORY - LIGHT BLUR
+   SAME STYLE AS NOTIFICATIONS
+========================================== */
+
+/* CREATE / EDIT / VIEW INVENTORY */
+body > .modal-overlay,
+body > .inventory-modal-overlay,
+body > .modal-backdrop {
+    background: rgba(0, 0, 0, 0.10) !important;
+
+    backdrop-filter: blur(4px) brightness(1) !important;
+    -webkit-backdrop-filter: blur(4px) brightness(1) !important;
+}
+
+/* ARCHIVE / RESTORE / DELETE CONFIRMATION */
+#printifyArchiveConfirm,
+.printify-confirm-overlay {
+    background: rgba(0, 0, 0, 0.10) !important;
+
+    backdrop-filter: blur(4px) brightness(1) !important;
+    -webkit-backdrop-filter: blur(4px) brightness(1) !important;
+}
+
+

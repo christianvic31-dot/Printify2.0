@@ -1,0 +1,76 @@
+/* PRINTIFY STAFF PROFILE — My Orders / Notifications matching layout */
+body.staff-profile-page { --profile-green:#19e51b; --profile-panel:rgba(5,30,15,.94); --profile-line:rgba(255,255,255,.16); --profile-text:#fff; --profile-muted:#c5d6ca; }
+body.staff-profile-page .sidebar { background:rgba(5,30,15,.96)!important; border:1px solid rgba(255,255,255,.22); border-radius:24px; }
+body.staff-profile-page .sidebar .logo { display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff!important;font-weight:800;font-size:1.7rem; }
+body.staff-profile-page .sidebar .logo span {color:#fff!important}
+body.staff-profile-page .profile-brand-logo {width:46px;height:46px;object-fit:contain;border-radius:12px}
+body.staff-profile-page .sidebar .nav-link {display:flex;align-items:center;gap:16px;color:#e4efe7!important}
+body.staff-profile-page .sidebar .nav-link i {width:20px;text-align:center;color:#a6b8aa}
+body.staff-profile-page .sidebar .nav-link.active {background:#19e51b!important;color:#06200b!important;font-weight:800}
+body.staff-profile-page .sidebar .nav-link.active i {color:#06200b}
+body.staff-profile-page .sidebar-label {color:#9eb4a5!important}
+body.staff-profile-page .sidebar-account strong,body.staff-profile-page .sidebar-account span {color:#fff!important}
+body.staff-profile-page .sidebar-account .account-details span {color:#b5c9ba!important}
+body.staff-profile-page .sidebar-logout {color:#ff9090!important}
+body.staff-profile-page .topbar {background:rgba(5,30,15,.96)!important;border:1px solid rgba(255,255,255,.2);border-radius:22px;color:#fff!important}
+body.staff-profile-page .topbar .page-heading h1,body.staff-profile-page .topbar .page-heading p,body.staff-profile-page #currentDate {color:#fff!important}
+body.staff-profile-page .topbar .page-heading p {opacity:.78}
+body.staff-profile-page #themeToggle img {display:block!important;width:23px;height:23px;object-fit:contain}
+body.staff-profile-page .topbar-right {position:relative}
+body.staff-profile-page .profile-account-button {display:flex;align-items:center;gap:10px;padding:6px 12px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.17);border-radius:14px;color:#fff;cursor:pointer}
+body.staff-profile-page .profile-account-button .account-avatar {width:36px;height:36px;min-width:36px;border-radius:50%;background:#19e51b;color:#06200b;display:grid;place-items:center;font-weight:800;font-size:.75rem}
+body.staff-profile-page .profile-account-text {display:grid;text-align:left;line-height:1.25}
+body.staff-profile-page .profile-account-text strong {color:#fff;font-size:.82rem}
+body.staff-profile-page .profile-account-text small {color:#b9cdbf;font-size:.7rem}
+body.staff-profile-page .profile-account-button > i {margin-left:8px;font-size:.72rem}
+body.staff-profile-page .profile-dropdown {position:absolute;right:0;top:calc(100% + 10px);min-width:180px;z-index:30;padding:8px;background:#102819;border:1px solid #355440;border-radius:12px;box-shadow:0 12px 28px #0006}
+body.staff-profile-page .profile-dropdown[hidden] {display:none!important}
+body.staff-profile-page .profile-dropdown a,body.staff-profile-page .profile-dropdown button {display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;border:0;border-radius:8px;background:transparent;color:#fff;text-decoration:none;font:inherit;text-align:left;cursor:pointer}
+body.staff-profile-page .profile-dropdown a:hover,body.staff-profile-page .profile-dropdown button:hover {background:#214b2d}
+body.staff-profile-page .profile-content {display:grid;gap:22px}
+body.staff-profile-page .staff-profile-breadcrumb {display:flex;align-items:center;gap:12px;width:max-content;max-width:100%;padding:14px 18px;background:rgba(5,20,11,.96);border:1px solid var(--profile-line);border-radius:13px;color:#fff!important;font-size:.82rem;font-weight:700}
+body.staff-profile-page .staff-profile-breadcrumb a {color:#19e51b!important;text-decoration:none}
+body.staff-profile-page .staff-profile-breadcrumb span {color:#fff!important}
+body.staff-profile-page .staff-profile-breadcrumb i {color:#bdcfc2}
+body.staff-profile-page .profile-introduction {display:flex;justify-content:space-between;align-items:center;gap:16px}
+body.staff-profile-page .profile-introduction h2 {color:#fff!important;font-size:1.45rem}
+body.staff-profile-page .profile-introduction p {color:#e4eee7!important}
+body.staff-profile-page .profile-overview {display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(25,229,27,.28);background:rgba(7,43,19,.72);padding:9px 14px;border-radius:999px;color:#fff!important;white-space:nowrap;font-size:.8rem;font-weight:700}
+body.staff-profile-page .profile-live-dot {height:8px;width:8px;background:#19e51b;border-radius:50%;box-shadow:0 0 10px #19e51b}
+body.staff-profile-page .profile-main-panel {padding:26px!important;background:var(--profile-panel)!important;border:1px solid var(--profile-line)!important;border-radius:22px!important;color:#fff!important;backdrop-filter:blur(14px)}
+body.staff-profile-page .profile-section-heading {display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;gap:12px}
+body.staff-profile-page .profile-section-heading h2 {font-size:1.2rem;color:#fff!important;margin:0 0 5px}
+body.staff-profile-page .profile-section-heading p {color:var(--profile-muted)!important;margin:0}
+body.staff-profile-page .profile-section-heading > i {color:#19e51b;font-size:1.25rem}
+body.staff-profile-page .staff-profile-summary {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0 0 22px}
+body.staff-profile-page .staff-profile-summary > div {background:rgba(255,255,255,.075)!important;border:1px solid var(--profile-line)!important;border-radius:13px;padding:18px;min-width:0}
+body.staff-profile-page .staff-profile-summary span {display:block;color:var(--profile-muted)!important;font-size:.82rem;margin-bottom:8px}
+body.staff-profile-page .staff-profile-summary strong {display:block;color:#fff!important;font-size:1.12rem;overflow-wrap:anywhere}
+body.staff-profile-page .staff-attendance-qr-panel {display:grid;justify-items:center;gap:14px;text-align:center;background:rgba(255,255,255,.055)!important;border:1px solid var(--profile-line)!important;border-radius:16px;padding:28px 18px;margin-bottom:26px}
+body.staff-profile-page .staff-attendance-qr-panel h2 {color:#fff!important;font-size:1.3rem;margin:0 0 7px}
+body.staff-profile-page .staff-attendance-qr-panel p {color:var(--profile-muted)!important;max-width:700px;margin:0 auto}
+body.staff-profile-page .staff-attendance-qr-code {width:240px;height:240px;display:grid;place-items:center;padding:12px;background:#fff!important;color:#303030!important;border-radius:12px;overflow:hidden;text-align:center}
+body.staff-profile-page .staff-attendance-qr-code * {max-width:100%}
+body.staff-profile-page .staff-attendance-qr-label {color:#fff!important;font-weight:800;letter-spacing:.06em}
+body.staff-profile-page .profile-form-heading {margin-top:12px}
+body.staff-profile-page .staff-page-fields {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+body.staff-profile-page .staff-page-field {display:grid;gap:8px}
+body.staff-profile-page .staff-page-field.full-width {grid-column:1/-1}
+body.staff-profile-page .staff-page-field label {color:#e7f2e9!important;font-weight:650}
+body.staff-profile-page .staff-page-field input,body.staff-profile-page .staff-page-field textarea {width:100%;background:rgba(255,255,255,.09)!important;border:1px solid rgba(255,255,255,.22)!important;border-radius:11px;color:#fff!important;padding:13px 15px;outline:none;box-sizing:border-box;font:inherit}
+body.staff-profile-page .staff-page-field input:focus,body.staff-profile-page .staff-page-field textarea:focus {border-color:#19e51b!important;box-shadow:0 0 0 3px rgba(25,229,27,.13)}
+body.staff-profile-page .staff-page-field input::placeholder,body.staff-profile-page .staff-page-field textarea::placeholder {color:#b5c9ba}
+body.staff-profile-page .staff-page-actions {margin-top:20px}
+body.staff-profile-page #saveProfileButton {display:inline-flex;align-items:center;gap:9px;background:#19e51b!important;color:#08210d!important;border:0;border-radius:11px;padding:13px 20px;font-weight:800;cursor:pointer}
+body.staff-profile-page #saveProfileButton:disabled {opacity:.55;cursor:not-allowed}
+body.staff-profile-page #profileMessage {color:#c8d8cd!important;min-height:22px}
+body.staff-profile-page #profileMessage.success {color:#75ff9b!important}
+body.staff-profile-page #profileMessage.error {color:#ff9c9c!important}
+body.staff-profile-page .profile-footer {display:flex;justify-content:space-between;gap:12px;color:#d2ded5;font-size:.78rem;padding:8px 3px 18px}
+body.staff-profile-page .profile-footer i {color:#19e51b;font-size:.55rem;margin-right:7px}
+/* Preserve same readable green-on-dark look in both themes, matching My Orders */
+body.staff-profile-page.dark-mode .profile-main-panel {background:rgba(3,20,10,.95)!important}
+body.staff-profile-page.dark-mode .sidebar,body.staff-profile-page.dark-mode .topbar {background:rgba(3,20,10,.97)!important}
+@media(min-width:850px) {body.staff-profile-page .profile-topbar-logout {display:none}}
+@media(max-width:849px) {body.staff-profile-page .profile-account-button {display:none}body.staff-profile-page .profile-dropdown {display:none!important}}
+@media(max-width:700px) {body.staff-profile-page .staff-profile-summary,body.staff-profile-page .staff-page-fields {grid-template-columns:1fr}body.staff-profile-page .profile-main-panel {padding:18px!important}body.staff-profile-page .profile-introduction {align-items:flex-start;flex-direction:column}body.staff-profile-page .profile-footer {flex-direction:column}body.staff-profile-page .staff-attendance-qr-code {width:210px;height:210px}}

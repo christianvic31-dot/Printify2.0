@@ -1,0 +1,52 @@
+/* STAFF NOTIFICATIONS — matches Staff My Orders dark-green glass layout. */
+/* Load after staff-dashboard.css and staff-pages.css. */
+.notifications-content { display:flex!important; flex-direction:column; gap:0!important; padding-top:28px; width:100%; }
+.notifications-content .notifications-breadcrumb { display:inline-flex; align-items:center; gap:12px; width:fit-content; margin:0 0 28px; padding:13px 17px; border:1px solid rgba(255,255,255,.17); border-radius:12px; background:rgba(5,20,11,.96); font-size:12px; font-weight:700; }
+.notifications-content .notifications-breadcrumb a { color:#19e51b!important; text-decoration:none; }
+.notifications-content .notifications-breadcrumb a:hover { text-decoration:underline; }
+.notifications-content .notifications-breadcrumb i { color:#c4d5c8!important; font-size:10px; }
+.notifications-content .notifications-breadcrumb [aria-current="page"] { color:#fff!important; }
+.notifications-content .notifications-introduction { display:flex; justify-content:space-between; align-items:center; gap:16px; margin:0 0 16px; }
+.notifications-content .notifications-introduction h2 { margin:0 0 4px; color:#fff!important; font-size:21px; font-weight:800; }
+.notifications-content .notifications-introduction p { margin:0; color:#d1dfd4!important; font-size:12px; }
+.notifications-content .notifications-refresh { display:inline-flex; align-items:center; gap:9px; padding:10px 12px; border:0; border-radius:10px; background:transparent; color:#19e51b!important; font-size:12px; font-weight:800; cursor:pointer; }
+.notifications-content .notifications-refresh:hover { background:rgba(25,229,27,.12); }
+.notifications-content .notifications-panel { padding:22px!important; margin:0 0 20px; border:1px solid rgba(255,255,255,.16)!important; border-radius:19px; background:rgba(7,31,17,.94)!important; box-shadow:0 15px 45px rgba(0,0,0,.16); color:#fff!important; min-height:290px; }
+.notifications-panel-header { display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin-bottom:24px; }
+.notifications-panel-header h2 { margin:0 0 6px; color:#fff!important; font-size:18px; font-weight:800; }
+.notifications-panel-header p { margin:0; color:#c7d7cb!important; font-size:12px; }
+.notifications-live { display:inline-flex; align-items:center; gap:9px; flex-shrink:0; color:#fff!important; font-size:11px; font-weight:700; }
+.notifications-dot { width:8px; height:8px; border-radius:50%; background:#19e51b; box-shadow:0 0 12px rgba(25,229,27,.6); }
+.notifications-content #notificationMessage { min-height:0; margin:0; color:#d1dfd4; }
+.notifications-content #notificationMessage:empty { display:none; }
+.notifications-content #notificationMessage.error { color:#ff9999!important; }
+.notifications-content #notificationMessage.success { color:#70f58c!important; }
+.notifications-content .staff-notification-list { display:grid; gap:13px; }
+.notifications-content .staff-notification { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:16px; padding:18px 20px; border:1px solid rgba(255,255,255,.15)!important; border-radius:13px; background:rgba(255,255,255,.065)!important; color:#fff!important; }
+.notifications-content .staff-notification.unread { border-left:4px solid #19e51b!important; }
+.notifications-content .staff-notification h3 { margin:0 0 6px; color:#fff!important; font-size:16px; font-weight:800; }
+.notifications-content .staff-notification p { margin:0; color:#d4e1d7!important; font-size:13px; }
+.notifications-content .staff-notification time { display:block; margin-top:9px; color:#b8cabb!important; font-size:11px; }
+.notifications-content .staff-notification button { padding:10px 14px; border:1px solid rgba(255,255,255,.22)!important; border-radius:10px; background:rgba(255,255,255,.07)!important; color:#fff!important; font-size:12px; font-weight:700; cursor:pointer; }
+.notifications-content .staff-notification button:hover { border-color:#19e51b!important; background:rgba(25,229,27,.13)!important; }
+.notifications-content .staff-notification button:disabled { opacity:.55; cursor:not-allowed; }
+.notifications-content .staff-page-empty { padding:35px 12px!important; color:#d4e1d7!important; text-align:center; }
+.notifications-content .dashboard-footer { margin-top:12px; color:#d4e1d7; }
+/* Light mode intentionally retains My Orders' dark-green cards and white text. */
+body:not(.dark-mode) .notifications-content .notifications-panel,
+body.light-mode .notifications-content .notifications-panel { background:rgba(7,31,17,.94)!important; color:#fff!important; }
+body:not(.dark-mode) .notifications-content .staff-notification,
+body.light-mode .notifications-content .staff-notification { background:rgba(255,255,255,.065)!important; color:#fff!important; }
+body.dark-mode .notifications-content .notifications-panel { background:rgba(3,17,9,.96)!important; }
+body.dark-mode .notifications-content .notifications-breadcrumb { background:rgba(3,13,7,.96)!important; }
+/* Ensure visible header/sidebar text even when shared light-mode styles use dark text. */
+body:not(.dark-mode) .sidebar .logo span,
+body:not(.dark-mode) .sidebar .nav-link:not(.active),
+body:not(.dark-mode) .sidebar-account strong,
+body:not(.dark-mode) .topbar .page-heading h1,
+body:not(.dark-mode) .topbar .profile-information strong { color:#fff!important; }
+body:not(.dark-mode) .topbar .page-heading p { color:#d1dfd4!important; }
+body:not(.dark-mode) .sidebar .nav-link.active { color:#071b0b!important; }
+body #themeToggle.theme-toggle::before,body #themeToggle.theme-toggle::after { content:none!important;display:none!important; }
+body #themeToggle.theme-toggle img#themeIcon { display:block!important; width:22px!important; height:22px!important; object-fit:contain; opacity:1!important; visibility:visible!important; }
+@media(max-width:700px) { .notifications-content .notifications-introduction { align-items:flex-start; flex-wrap:wrap; } .notifications-content .notifications-panel { padding:18px!important; } .notifications-content .staff-notification { grid-template-columns:1fr; } .notifications-content .staff-notification button { justify-self:start; } .notifications-panel-header { flex-wrap:wrap; } }

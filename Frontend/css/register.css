@@ -1,0 +1,1362 @@
+
+/* ==========================================
+   PRINTIFY CALAPAN
+   REGISTER PAGE
+   CLEAN LIQUID GLASS DESIGN
+========================================== */
+
+/* ==========================================
+   1. ROOT VARIABLES
+========================================== */
+
+:root {
+    --logo-green: #19E51B;
+    --logo-hover: #12C918;
+
+    --forest-green: #173B27;
+    --deep-green: #102A1C;
+    --dark-green: #0C1D14;
+
+    --heading-color: #FFFFFF;
+    --muted-text: #CBD5CC;
+
+    --glass-background: rgba(10, 24, 16, 0.38);
+    --glass-border: rgba(255, 255, 255, 0.20);
+}
+
+
+/* ==========================================
+   2. RESET
+========================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    min-height: 100%;
+
+    scroll-behavior: smooth;
+
+    overflow-x: clip;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+
+    font-family: 'Inter', sans-serif;
+    color: var(--heading-color);
+
+    overflow-x: clip;
+}
+
+
+/* ==========================================
+   3. BACKGROUND
+========================================== */
+
+.register-page {
+    position: relative;
+
+    width: 100%;
+    min-height: 100vh;
+
+    background: #000000;
+
+    overflow-x: clip;
+}
+
+.background-image {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-image: url("../image/printify_bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    z-index: 0;
+
+    animation: backgroundZoom 22s ease-in-out infinite alternate;
+}
+
+.background-overlay {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.12);
+
+    z-index: 1;
+    pointer-events: none;
+}
+
+
+/* ==========================================
+   4. MAIN CONTAINER
+========================================== */
+
+.register-container {
+    position: relative;
+    z-index: 2;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+
+    width: 100%;
+    min-height: 100vh;
+}
+
+
+/* ==========================================
+   5. LEFT BRAND SECTION
+   UPPER LEFT POSITION
+========================================== */
+
+.image-section {
+    position: sticky;
+    top: 0;
+
+    align-self: start;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+
+    padding: 35px 35px;
+
+    overflow: hidden;
+}
+
+
+/* ==========================================
+   6. LEFT LIQUID GLASS BOX
+========================================== */
+
+.brand-glass-card {
+    position: relative;
+    isolation: isolate;
+
+    display: block;
+
+    width: 100%;
+    max-width: 440px;
+
+    margin: 0;
+    padding: 28px 25px;
+
+    background: linear-gradient(
+        135deg,
+        rgba(23, 59, 39, 0.88),
+        rgba(10, 24, 16, 0.82)
+    );
+
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+
+    border: 1px solid rgba(255, 255, 255, 0.30);
+    border-radius: 0;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.30),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+
+    overflow: hidden;
+
+    animation: glassRevealLeft 1.2s ease forwards;
+}
+
+
+/* GLASS REFLECTION */
+
+.brand-glass-card::before {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+
+    top: -45%;
+    left: -15%;
+
+    width: 120%;
+    height: 100%;
+
+    background: linear-gradient(
+        120deg,
+        transparent 15%,
+        rgba(255, 255, 255, 0.12) 45%,
+        transparent 75%
+    );
+
+    transform: rotate(-12deg);
+
+    pointer-events: none;
+}
+
+.brand-glass-card::after {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+
+    bottom: -65%;
+    right: -20%;
+
+    width: 350px;
+    height: 350px;
+
+    background: radial-gradient(
+        circle,
+        rgba(25, 229, 27, 0.14),
+        transparent 70%
+    );
+
+    pointer-events: none;
+
+    animation: reflectionMove 12s ease-in-out infinite alternate;
+}
+
+
+/* ==========================================
+   7. BRAND LOGO
+========================================== */
+
+.brand-logo {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    gap: 17px;
+    width: 100%;
+
+    animation: fadeSlideDown 1s ease forwards;
+}
+
+
+/* LOGO IMAGE */
+
+.brand-image {
+    flex-shrink: 0;
+
+    width: 78px;
+    height: 78px;
+
+    object-fit: contain;
+    object-position: center;
+
+    background: transparent;
+
+    filter: drop-shadow(
+        0 4px 8px rgba(0, 0, 0, 0.30)
+    );
+
+    transition: transform 0.35s ease;
+}
+
+.brand-glass-card:hover .brand-image {
+    transform: scale(1.05);
+}
+
+
+/* BRAND DETAILS */
+
+.brand-details {
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+/* PRINTIFY + CALAPAN */
+
+.brand-title {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+
+    gap: 9px;
+}
+
+.brand-title h1 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+
+    font-size: 35px;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+
+    color: #FFFFFF;
+
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.20);
+}
+
+.brand-title span {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+
+    color: var(--logo-green);
+}
+
+
+/* DJJ COMPUTER SHOP */
+
+.brand-details p {
+    font-family: 'Inter', sans-serif;
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+
+    color: #FFFFFF;
+}
+
+
+/* BRAND DIVIDER */
+
+.brand-divider {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    height: 1px;
+
+    margin: 22px 0 15px;
+
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(255, 255, 255, 0.35),
+        transparent
+    );
+}
+
+
+/* BRAND CAPTION */
+
+.brand-caption {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+}
+
+.brand-caption-line {
+    width: 22px;
+    height: 2px;
+
+    flex-shrink: 0;
+
+    background: var(--logo-green);
+}
+
+.brand-caption p {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+
+    color: rgba(255, 255, 255, 0.75);
+    text-align: center;
+}
+
+
+/* ==========================================
+   8. RIGHT REGISTER SECTION
+========================================== */
+
+.register-section {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    min-width: 0;
+    min-height: 100vh;
+
+    padding: 22px 35px;
+
+    background: var(--glass-background);
+
+    backdrop-filter: blur(13px) saturate(135%);
+    -webkit-backdrop-filter: blur(13px) saturate(135%);
+
+    border-left: 1px solid rgba(255, 255, 255, 0.18);
+
+    box-shadow: -15px 0 45px rgba(0, 0, 0, 0.10);
+
+    animation: glassReveal 1.2s ease forwards;
+}
+
+
+/* RIGHT GLASS REFLECTION */
+
+.register-section::before {
+    content: "";
+
+    position: absolute;
+    top: -25%;
+    right: -15%;
+
+    width: 500px;
+    height: 500px;
+
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.10),
+        transparent 70%
+    );
+
+    pointer-events: none;
+
+    animation: reflectionMove 9s ease-in-out infinite alternate;
+}
+
+.register-section::after {
+    content: "";
+
+    position: absolute;
+    bottom: -30%;
+    left: -20%;
+
+    width: 450px;
+    height: 450px;
+
+    background: radial-gradient(
+        circle,
+        rgba(25, 229, 27, 0.09),
+        transparent 70%
+    );
+
+    pointer-events: none;
+
+    animation: reflectionMove 12s ease-in-out infinite alternate-reverse;
+}
+
+
+/* ==========================================
+   9. REGISTER CONTENT
+========================================== */
+
+.register-glass-panel {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    max-width: 420px;
+    min-width: 0;
+
+    padding: 20px 18px;
+
+    background: transparent;
+    border: none;
+    box-shadow: none;
+
+    animation: fadeSlideUp 1s ease forwards;
+}
+
+
+/* REGISTER HEADER */
+
+.register-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.register-header h2 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+
+    color: var(--logo-green);
+
+    margin-bottom: 8px;
+
+    text-shadow: 0 3px 15px rgba(0, 0, 0, 0.20);
+}
+
+.register-header p {
+    color: rgba(255, 255, 255, 0.86);
+
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+
+/* ==========================================
+   10. INPUT GROUP
+========================================== */
+
+.input-group {
+    width: 100%;
+    min-width: 0;
+
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+
+    color: #FFFFFF;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    margin-bottom: 6px;
+}
+
+
+/* INPUT WRAPPER */
+
+.input-wrapper {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    height: 42px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.45);
+
+    transition: 0.3s ease;
+}
+
+.input-wrapper:focus-within {
+    border-bottom-color: var(--logo-green);
+
+    box-shadow: 0 5px 15px rgba(25, 229, 27, 0.12);
+}
+
+.input-wrapper input {
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+    color: #FFFFFF;
+
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+
+    padding-right: 40px;
+}
+
+.input-wrapper input::placeholder {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 12px;
+}
+
+
+/* ==========================================
+   11. PASSWORD TOGGLE
+========================================== */
+
+.password-toggle {
+    position: absolute;
+    right: 5px;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+.password-toggle:hover {
+    color: var(--logo-green);
+    transform: scale(1.1);
+}
+
+
+/* ==========================================
+   12. PASSWORD REQUIREMENTS
+========================================== */
+
+.password-requirements {
+    margin-top: 9px;
+}
+
+.password-requirements p {
+    font-size: 11px;
+    font-weight: 700;
+
+    color: rgba(255, 255, 255, 0.90);
+
+    margin-bottom: 7px;
+}
+
+.password-requirements ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 7px;
+
+    list-style: none;
+}
+
+.password-requirements li {
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.password-requirements li i {
+    font-size: 6px;
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.password-requirements li.valid {
+    color: #A6FF9E;
+}
+
+.password-requirements li.valid i {
+    color: var(--logo-green);
+}
+
+
+/* ==========================================
+   13. PASSWORD STRENGTH
+========================================== */
+
+.strength-container {
+    margin-top: 9px;
+}
+
+.strength-bar {
+    width: 100%;
+    height: 5px;
+
+    background: rgba(255, 255, 255, 0.20);
+
+    overflow: hidden;
+}
+
+#strengthBar {
+    width: 0%;
+    height: 100%;
+
+    background: #E74C3C;
+
+    transition:
+        width 0.3s ease,
+        background 0.3s ease;
+}
+
+#strengthText {
+    display: block;
+
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.75);
+
+    margin-top: 6px;
+}
+
+
+/* ==========================================
+   14. ERROR MESSAGES
+========================================== */
+
+.error-message {
+    display: none;
+
+    color: #FFB5B5;
+
+    font-size: 11px;
+    line-height: 1.5;
+
+    margin-top: 7px;
+}
+
+.error-message:not(:empty) {
+    display: block;
+}
+
+
+/* ==========================================
+   15. TERMS AND CONDITIONS
+========================================== */
+
+.terms-container {
+    margin: 15px 0 17px;
+}
+
+.terms-label {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 9px;
+
+    color: rgba(255, 255, 255, 0.90);
+
+    font-size: 11px;
+    line-height: 1.5;
+
+    cursor: pointer;
+    user-select: none;
+}
+
+.terms-label input {
+    flex-shrink: 0;
+
+    width: 15px;
+    height: 15px;
+
+    margin-top: 1px;
+
+    accent-color: var(--logo-green);
+    cursor: pointer;
+}
+
+.terms-label a {
+    color: var(--logo-green);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.terms-label a:hover {
+    color: #FFFFFF;
+}
+
+
+/* ==========================================
+   16. REGISTER MESSAGE
+========================================== */
+
+.register-message {
+    font-size: 12px;
+    line-height: 1.5;
+
+    text-align: center;
+
+    margin-bottom: 12px;
+}
+
+.register-message.success {
+    color: #A6FF9E;
+}
+
+.register-message.error {
+    color: #FFB5B5;
+}
+
+
+/* ==========================================
+   17. REGISTER BUTTON
+========================================== */
+
+.register-button {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 13px;
+
+    width: 100%;
+    height: 48px;
+
+    border: 1px solid var(--logo-green);
+
+    background: var(--logo-green);
+    color: #102A1C;
+
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    transition: all 0.35s ease;
+
+    box-shadow: 0 7px 22px rgba(25, 229, 27, 0.18);
+}
+
+
+/* BUTTON SHINE */
+
+.register-button::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: -120%;
+
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(
+        110deg,
+        transparent,
+        rgba(255, 255, 255, 0.38),
+        transparent
+    );
+
+    transition: 0.6s ease;
+}
+
+.register-button:hover::before {
+    left: 120%;
+}
+
+.register-button:hover {
+    background: var(--logo-hover);
+    color: #102A1C;
+
+    border-color: var(--logo-hover);
+
+    box-shadow: 0 10px 30px rgba(25, 229, 27, 0.30);
+
+    transform: translateY(-2px);
+}
+
+.register-button:active {
+    transform: scale(0.98);
+}
+
+.register-button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.register-button i {
+    font-size: 13px;
+    transition: transform 0.3s ease;
+}
+
+.register-button:hover i {
+    transform: translateX(5px);
+}
+
+
+/* ==========================================
+   18. LOGIN LINK
+========================================== */
+
+.login-link {
+    text-align: center;
+    margin-top: 18px;
+}
+
+.login-link p {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 12px;
+}
+
+.login-link a {
+    color: #FFFFFF;
+    font-weight: 800;
+    text-decoration: none;
+
+    margin-left: 4px;
+
+    transition: 0.3s ease;
+}
+
+.login-link a:hover {
+    color: var(--logo-green);
+}
+
+
+/* ==========================================
+   19. FOOTER
+========================================== */
+
+.register-footer {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+
+    text-align: center;
+
+    margin-top: 12px;
+    padding-bottom: 10px;
+}
+
+.register-footer p {
+    color: rgba(255, 255, 255, 0.60);
+
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+
+/* ==========================================
+   20. ANIMATIONS
+========================================== */
+
+@keyframes backgroundZoom {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.07);
+    }
+}
+
+@keyframes glassReveal {
+    from {
+        opacity: 0;
+        transform: translateX(35px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes glassRevealLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes reflectionMove {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(-35px, 35px);
+    }
+}
+
+
+/* ==========================================
+   21. TABLET RESPONSIVE
+========================================== */
+
+@media (max-width: 1000px) and (min-width: 701px) {
+
+    .register-container {
+        grid-template-columns: 42% 58%;
+    }
+
+    .image-section {
+        padding: 30px 20px;
+    }
+
+    .brand-glass-card {
+        padding: 25px 18px;
+    }
+
+    .brand-logo {
+        gap: 12px;
+    }
+
+    .brand-image {
+        width: 68px;
+        height: 68px;
+    }
+
+    .brand-title h1 {
+        font-size: 29px;
+    }
+
+    .brand-title span {
+        font-size: 10px;
+    }
+
+    .brand-details p {
+        font-size: 9px;
+    }
+
+    .register-section {
+        padding: 20px;
+    }
+
+    .register-glass-panel {
+        padding: 15px;
+    }
+}
+
+
+/* ==========================================
+   22. MOBILE RESPONSIVE
+========================================== */
+
+@media (max-width: 700px) {
+
+    html,
+    body {
+        overflow-x: clip;
+    }
+
+    .register-container {
+        display: grid;
+        grid-template-columns: 1fr;
+
+        min-height: 100vh;
+    }
+
+    /* LEFT BRAND */
+
+    .image-section {
+        position: relative;
+        top: auto;
+
+        width: 100%;
+        height: auto;
+        min-height: auto;
+
+        padding: 20px 15px 12px;
+
+        align-items: center;
+        justify-content: center;
+    }
+
+    .brand-glass-card {
+        width: 100%;
+        max-width: 420px;
+
+        min-height: auto;
+
+        padding: 18px 15px;
+    }
+
+    .brand-logo {
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+
+        gap: 13px;
+    }
+
+    .brand-image {
+        width: 55px;
+        height: 55px;
+    }
+
+    .brand-title {
+        justify-content: flex-start;
+        gap: 7px;
+    }
+
+    .brand-title h1 {
+        font-size: 25px;
+    }
+
+    .brand-title span {
+        font-size: 9px;
+    }
+
+    .brand-details p {
+        font-size: 8px;
+        letter-spacing: 1px;
+    }
+
+    .brand-divider {
+        margin: 15px 0 12px;
+    }
+
+    .brand-caption p {
+        font-size: 7px;
+    }
+
+
+    /* RIGHT REGISTER */
+
+    .register-section {
+        width: 100%;
+
+        min-height: auto;
+
+        padding: 18px 12px 25px;
+
+        background: rgba(10, 24, 16, 0.60);
+
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.18);
+
+        backdrop-filter: blur(13px);
+        -webkit-backdrop-filter: blur(13px);
+    }
+
+    .register-glass-panel {
+        width: 100%;
+        max-width: 440px;
+
+        padding: 18px 15px;
+    }
+
+    .register-header {
+        margin-bottom: 20px;
+    }
+
+    .register-header h2 {
+        font-size: 29px;
+    }
+
+    .register-footer {
+        margin-top: 20px;
+    }
+}
+
+
+/* ==========================================
+   23. SMALL MOBILE
+========================================== */
+
+@media (max-width: 380px) {
+
+    .image-section {
+        padding: 18px 12px 10px;
+    }
+
+    .brand-glass-card {
+        padding: 16px 12px;
+    }
+
+    .brand-image {
+        width: 48px;
+        height: 48px;
+    }
+
+    .brand-title h1 {
+        font-size: 22px;
+    }
+
+    .brand-title span {
+        font-size: 8px;
+    }
+
+    .register-section {
+        padding: 15px 10px 22px;
+    }
+
+    .register-glass-panel {
+        padding: 15px 12px;
+    }
+
+    .register-header h2 {
+        font-size: 26px;
+    }
+
+    .password-requirements ul {
+        grid-template-columns: 1fr;
+    }
+
+    .register-footer p {
+        font-size: 8px;
+    }
+}
+
+
+/* ==========================================
+   24. BROWSER FALLBACK
+========================================== */
+
+@supports not (backdrop-filter: blur(13px)) {
+
+    .brand-glass-card,
+    .register-section {
+        background: rgba(10, 24, 16, 0.94);
+    }
+}
+
+
+/* ==========================================
+   25. REDUCED MOTION
+========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+/* ==========================================
+   FINAL SCROLLBAR REMOVAL
+   NO VERTICAL / HORIZONTAL SCROLL
+========================================== */
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    overflow: hidden !important;
+}
+
+.register-page {
+    width: 100%;
+    height: 100vh;
+    min-height: 0;
+
+    overflow: hidden !important;
+}
+
+.register-container {
+    width: 100%;
+    height: 100vh;
+    min-height: 0;
+
+    overflow: hidden !important;
+}
+
+/* LEFT SIDE */
+.image-section {
+    height: 100vh;
+    min-height: 0;
+
+    position: relative;
+    top: auto;
+
+    overflow: hidden !important;
+}
+
+/* RIGHT SIDE */
+.register-section {
+    height: 100vh;
+    min-height: 0;
+
+    overflow: hidden !important;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* REGISTER CONTENT */
+.register-glass-panel {
+    max-height: 100%;
+    overflow: hidden !important;
+}
+
+/* REMOVE SCROLLBAR APPEARANCE */
+::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+    html,
+    body,
+    .register-page,
+    .register-container {
+        height: 100vh;
+        min-height: 0;
+        overflow: hidden !important;
+    }
+
+    .register-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+    }
+
+    .image-section {
+        height: auto;
+        min-height: 0;
+        position: relative;
+        padding: 12px 15px;
+    }
+
+    .brand-glass-card {
+        padding: 15px;
+    }
+
+    .brand-image {
+        width: 48px;
+        height: 48px;
+    }
+
+    .register-section {
+        height: 100%;
+        min-height: 0;
+        padding: 10px 15px;
+        justify-content: center;
+    }
+
+    .register-glass-panel {
+        padding: 10px 15px;
+        overflow: hidden !important;
+    }
+}

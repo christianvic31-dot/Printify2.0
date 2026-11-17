@@ -1,0 +1,395 @@
+/* Printify Staff Attendance — page-specific styles. Keep staff-dashboard.css and staff-pages.css loaded first. */
+.attendance-content { display: grid; gap: 20px; }
+.attendance-content .attendance-breadcrumb { display: inline-flex; width: fit-content; align-items: center; gap: 12px; padding: 13px 17px; border: 1px solid rgba(255,255,255,.17); border-radius: 12px; background: rgba(5,20,11,.95); color: #fff; font-size: 12px; font-weight: 700; }
+.attendance-breadcrumb a { color: #19e51b; }
+.attendance-breadcrumb a:hover { text-decoration: underline; }
+.attendance-breadcrumb i { color: #a8b8ab; font-size: 10px; }
+.attendance-content .content-introduction { margin: 0; }
+.attendance-content .content-introduction h2 { color: #fff; }
+.attendance-content .content-introduction p { color: #c2d0c4; }
+.attendance-live { display: inline-flex; align-items: center; gap: 9px; padding: 9px 13px; border: 1px solid rgba(25,229,27,.25); border-radius: 24px; background: rgba(25,229,27,.1); color: #fff; font-size: 11px; font-weight: 700; }
+.attendance-content .staff-page-panel { padding: 26px; border: 1px solid rgba(255,255,255,.17); border-radius: 19px; background: rgba(7,31,17,.94); color: #fff; box-shadow: 0 15px 45px rgba(0,0,0,.2); }
+.attendance-panel-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 22px; }
+.attendance-eyebrow { display: block; margin-bottom: 9px; color: #6bf479; font-size: 10px; font-weight: 800; letter-spacing: 1.2px; }
+.attendance-panel-heading h2 { margin: 0; color: #fff; font-size: 23px; font-weight: 800; }
+.attendance-heading-icon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; background: rgba(25,229,27,.13); color: #19e51b; font-size: 19px; }
+.attendance-time-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 15px; }
+.attendance-time-card { padding: 19px; border: 1px solid rgba(255,255,255,.14); border-radius: 13px; background: rgba(255,255,255,.065); }
+.attendance-time-card span { display: flex; align-items: center; gap: 9px; margin-bottom: 12px; color: #c5d6c8; font-size: 12px; font-weight: 700; }
+.attendance-time-card span i { color: #19e51b; }
+.attendance-time-card strong { display: block; color: #fff; font-size: 22px; font-weight: 800; overflow-wrap: anywhere; }
+.attendance-actions { margin-top: 23px; }
+.attendance-actions .staff-page-button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 42px; padding: 10px 17px; border: 1px solid rgba(25,229,27,.55); border-radius: 10px; background: #19e51b; color: #071608; font-size: 12px; font-weight: 800; transition: .2s ease; }
+.attendance-actions .staff-page-button:hover:not(:disabled) { background: #42f542; transform: translateY(-1px); }
+.attendance-actions .staff-page-button.secondary { background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.20); color: #fff; }
+.attendance-actions .staff-page-button.secondary:hover:not(:disabled) { background: rgba(25,229,27,.14); border-color: rgba(25,229,27,.55); }
+.attendance-actions .staff-page-button:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+.attendance-content .staff-page-message { margin-top: 14px; min-height: 18px; color: #c5d6c8; font-size: 12px; }
+.attendance-content .staff-page-message.error { color: #ff9898; }
+.attendance-content .staff-page-message.success { color: #78f58c; }
+.attendance-history-panel .panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.attendance-history-panel .panel-header h2 { color: #fff; font-size: 18px; }
+.attendance-history-panel .panel-header p { color: #bdcec0; font-size: 12px; }
+.attendance-history-icon { color: #19e51b; font-size: 20px; }
+.attendance-content .staff-page-table-wrap { overflow-x: auto; border: 1px solid rgba(255,255,255,.16); border-radius: 12px; }
+.attendance-content .staff-page-table { width: 100%; min-width: 540px; border-collapse: collapse; }
+.attendance-content .staff-page-table thead { background: #234d2e; }
+.attendance-content .staff-page-table th { padding: 15px 14px; color: #fff; font-size: 11px; font-weight: 800; letter-spacing: .5px; text-align: left; }
+.attendance-content .staff-page-table td { padding: 15px 14px; border-bottom: 1px solid rgba(255,255,255,.1); color: #fff; font-size: 12px; }
+.attendance-content .staff-page-table tbody tr:hover { background: rgba(25,229,27,.06); }
+.attendance-content .staff-page-empty { color: #c5d6c8 !important; }
+/* Preserve actual image-based theme icon, never replace it with CSS-generated symbols. */
+body #themeToggle.theme-toggle::before, body #themeToggle.theme-toggle::after { content: none !important; display: none !important; }
+body #themeToggle.theme-toggle > img#themeIcon.theme-image-icon { display: block !important; width: 22px; height: 22px; object-fit: contain; visibility: visible !important; opacity: 1 !important; filter: none !important; }
+/* Both themes retain the reference dark-green attendance panels; global background follows staff-dashboard.css. */
+body.dark-mode .attendance-content .staff-page-panel { background: rgba(3,17,9,.96); }
+body.dark-mode .attendance-content .attendance-breadcrumb { background: rgba(3,13,7,.96); }
+@media(max-width:700px) { .attendance-content .staff-page-panel { padding: 18px; } .attendance-time-grid { grid-template-columns: 1fr; } .attendance-content .content-introduction { flex-wrap: wrap; } .attendance-actions .staff-page-button { flex: 1; } }
+
+
+/* ============================================================
+   MATCH STAFF MY ORDERS PAGE: spacing, cards, header, typography
+   This file loads AFTER staff-dashboard.css and staff-pages.css.
+   ============================================================ */
+:root { --attendance-green: #19e51b; }
+body .attendance-content.orders-matched-layout {
+    width: 100%; display: flex; flex-direction: column;
+    gap: 0; padding-top: 28px;
+}
+body .attendance-content .attendance-breadcrumb {
+    margin: 0 0 28px 0; padding: 13px 17px;
+    width: fit-content; flex: 0 0 auto;
+}
+body .attendance-content .orders-section-heading {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 18px; margin: 0 0 16px; padding: 0;
+}
+body .attendance-content .orders-section-heading h2 {
+    margin: 0 0 4px; font-size: 21px; font-weight: 800;
+}
+body .attendance-content .orders-section-heading p {margin: 0; font-size: 12px;}
+body .attendance-content .attendance-live { flex-shrink: 0; }
+body .attendance-content .orders-style-panel {
+    width: 100%; min-width: 0; padding: 22px;
+    border-radius: 19px; margin: 0 0 20px;
+    background: rgba(7,31,17,.94) !important;
+    border: 1px solid rgba(255,255,255,.16) !important;
+    box-shadow: 0 15px 45px rgba(0,0,0,.16);
+}
+body .attendance-content .attendance-today-panel { min-height: 0; }
+body .attendance-content .attendance-panel-heading { margin-bottom: 17px; }
+body .attendance-content .attendance-time-card {padding: 17px 19px;}
+body .attendance-content .attendance-actions { margin-top: 18px; }
+body .attendance-content .attendance-history-panel .panel-header {margin-bottom: 17px;}
+body .attendance-content .staff-page-table-wrap { background: rgba(0,30,13,.60); }
+body .attendance-content .staff-page-table thead { background: #285338; }
+body .attendance-content .staff-page-table th {font-size: 10px;}
+body .attendance-content .staff-page-table td {font-size: 12px;}
+body .attendance-content .dashboard-footer { margin-top: 12px; }
+/* Light mode: keep legible white type on the green panels */
+body:not(.dark-mode) .attendance-content .orders-style-panel h2,
+body:not(.dark-mode) .attendance-content .orders-style-panel strong,
+body:not(.dark-mode) .attendance-content .orders-style-panel td,
+body:not(.dark-mode) .attendance-content .orders-style-panel th {color:#fff !important;}
+body:not(.dark-mode) .attendance-content .orders-style-panel p,
+body:not(.dark-mode) .attendance-content .attendance-time-card span {color:#d1dfd4 !important;}
+body:not(.dark-mode) .attendance-content .staff-page-button.secondary {color:#fff !important;}
+body:not(.dark-mode) .attendance-content .staff-page-button:not(.secondary) {color:#071608 !important;}
+/* Match the My Orders topbar's account dropdown */
+body .topbar .profile-container {position:relative;}
+body .topbar .profile-dropdown {z-index:1100;}
+body .topbar #themeToggle img#themeIcon {display:block !important;width:23px;height:23px;object-fit:contain;}
+@media (max-width: 760px) {
+  body .attendance-content.orders-matched-layout {padding-top:18px;}
+  body .attendance-content .orders-section-heading {align-items:flex-start; flex-wrap:wrap;}
+  body .attendance-content .orders-style-panel {padding:18px;}
+  body .topbar .profile-information {display:none;}
+}
+
+/* ==========================================
+   PRINTIFY ATTENDANCE
+   LIGHT MODE TEXT VISIBILITY FIX
+   ========================================== */
+
+/* SIDEBAR TEXT */
+body:not(.dark-mode) .sidebar {
+    color: #ffffff !important;
+}
+
+body:not(.dark-mode) .sidebar .logo,
+body:not(.dark-mode) .sidebar .logo span,
+body:not(.dark-mode) .sidebar .nav-link,
+body:not(.dark-mode) .sidebar .nav-link span,
+body:not(.dark-mode) .sidebar-account strong,
+body:not(.dark-mode) .sidebar-account span,
+body:not(.dark-mode) .sidebar-footer,
+body:not(.dark-mode) .sidebar-footer span {
+    color: #ffffff !important;
+}
+
+/* SIDEBAR LABELS */
+body:not(.dark-mode) .sidebar-label {
+    color: #b8c9bd !important;
+}
+
+/* ACTIVE SIDEBAR MENU */
+body:not(.dark-mode) .sidebar .nav-link.active,
+body:not(.dark-mode) .sidebar .nav-link.active span {
+    color: #06200d !important;
+}
+
+/* LOGOUT BUTTON */
+body:not(.dark-mode) .sidebar-logout {
+    color: #ff8e8e !important;
+}
+
+/* TOPBAR TITLE AND DESCRIPTION */
+body:not(.dark-mode) .topbar h1,
+body:not(.dark-mode) .topbar .page-heading h1 {
+    color: #ffffff !important;
+}
+
+body:not(.dark-mode) .topbar p,
+body:not(.dark-mode) .topbar .page-heading p {
+    color: #d1dfd5 !important;
+}
+
+/* TOPBAR DATE AND PROFILE */
+body:not(.dark-mode) .topbar-right,
+body:not(.dark-mode) #currentDate,
+body:not(.dark-mode) .profile-button,
+body:not(.dark-mode) .profile-button strong,
+body:not(.dark-mode) .profile-button span {
+    color: #ffffff !important;
+}
+
+/* PROFILE DROPDOWN */
+body:not(.dark-mode) .profile-dropdown {
+    color: #ffffff !important;
+    background: #102819 !important;
+}
+
+body:not(.dark-mode) .profile-dropdown a,
+body:not(.dark-mode) .profile-dropdown button {
+    color: #ffffff !important;
+}
+
+/* BREADCRUMB */
+body:not(.dark-mode) .staff-attendance-breadcrumb,
+body:not(.dark-mode) .staff-breadcrumb {
+    color: #ffffff !important;
+}
+
+body:not(.dark-mode) .staff-attendance-breadcrumb a,
+body:not(.dark-mode) .staff-breadcrumb a {
+    color: #19e51b !important;
+}
+
+body:not(.dark-mode) .staff-attendance-breadcrumb span,
+body:not(.dark-mode) .staff-breadcrumb span {
+    color: #ffffff !important;
+}
+
+/* ATTENDANCE PANELS */
+body:not(.dark-mode) .staff-page-panel {
+    color: #ffffff !important;
+}
+
+body:not(.dark-mode) .staff-page-panel h2,
+body:not(.dark-mode) .staff-page-panel h3,
+body:not(.dark-mode) .staff-page-panel strong {
+    color: #ffffff !important;
+}
+
+body:not(.dark-mode) .staff-page-panel p {
+    color: #d6e5d9 !important;
+}
+
+/* CURRENT ATTENDANCE */
+body:not(.dark-mode) #attendanceStatus,
+body:not(.dark-mode) #timeInValue,
+body:not(.dark-mode) #timeOutValue {
+    color: #ffffff !important;
+}
+
+/* TABLE TEXT */
+body:not(.dark-mode) .staff-page-table th,
+body:not(.dark-mode) .staff-page-table td {
+    color: #ffffff !important;
+}
+
+/* SECONDARY BUTTONS */
+body:not(.dark-mode) .staff-page-button.secondary {
+    color: #ffffff !important;
+}
+
+/* CLOCK IN BUTTON */
+body:not(.dark-mode) .staff-page-button:not(.secondary) {
+    color: #071b0b !important;
+}
+
+/* FOOTER */
+body:not(.dark-mode) .dashboard-footer,
+body:not(.dark-mode) .dashboard-footer span {
+    color: #d1dfd5 !important;
+}
+
+/* ==========================================
+   PRINTIFY STAFF ATTENDANCE
+   MATCH MY ORDERS DESIGN
+   LIGHT MODE FINAL FIX
+   ========================================== */
+
+/* MAIN ATTENDANCE PANELS */
+body:not(.dark-mode) .staff-page-content .staff-page-panel {
+    background: rgba(5, 30, 15, 0.94) !important;
+    border: 1px solid rgba(255,255,255,0.18) !important;
+    color: #ffffff !important;
+}
+
+/* ALL PANEL HEADINGS */
+body:not(.dark-mode) .staff-page-panel h2,
+body:not(.dark-mode) .staff-page-panel h3,
+body:not(.dark-mode) .staff-page-panel strong,
+body:not(.dark-mode) #attendanceStatus {
+    color: #ffffff !important;
+}
+
+/* PANEL DESCRIPTIONS */
+body:not(.dark-mode) .staff-page-panel p,
+body:not(.dark-mode) .staff-page-panel span {
+    color: #d5e6d9 !important;
+}
+
+/* BREADCRUMB - SAME AS MY ORDERS */
+body:not(.dark-mode) .staff-attendance-breadcrumb,
+body:not(.dark-mode) .staff-breadcrumb {
+    background: rgba(5, 20, 11, 0.96) !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    color: #ffffff !important;
+}
+
+body:not(.dark-mode) .staff-attendance-breadcrumb a,
+body:not(.dark-mode) .staff-breadcrumb a {
+    color: #19e51b !important;
+}
+
+body:not(.dark-mode) .staff-attendance-breadcrumb span,
+body:not(.dark-mode) .staff-breadcrumb span,
+body:not(.dark-mode) .staff-attendance-breadcrumb [aria-current="page"],
+body:not(.dark-mode) .staff-breadcrumb [aria-current="page"] {
+    color: #ffffff !important;
+}
+
+body:not(.dark-mode) .staff-attendance-breadcrumb i,
+body:not(.dark-mode) .staff-breadcrumb i {
+    color: #c4d5c8 !important;
+}
+
+/* ATTENDANCE OVERVIEW BADGE */
+body:not(.dark-mode) .attendance-overview,
+body:not(.dark-mode) .attendance-overview-badge {
+    background: rgba(5, 30, 15, 0.88) !important;
+    border: 1px solid rgba(255,255,255,0.20) !important;
+    color: #ffffff !important;
+}
+
+body:not(.dark-mode) .attendance-overview *,
+body:not(.dark-mode) .attendance-overview-badge * {
+    color: #ffffff !important;
+}
+
+/* TIME IN / TIME OUT CARDS */
+body:not(.dark-mode) .staff-attendance-time-card,
+body:not(.dark-mode) .attendance-time-card,
+body:not(.dark-mode) .attendance-time-box {
+    background: rgba(255,255,255,0.08) !important;
+    border: 1px solid rgba(255,255,255,0.18) !important;
+    color: #ffffff !important;
+}
+
+/* TIME LABELS */
+body:not(.dark-mode) .staff-attendance-time-card span,
+body:not(.dark-mode) .attendance-time-card span,
+body:not(.dark-mode) .attendance-time-box span {
+    color: #d5e6d9 !important;
+}
+
+/* TIME VALUES */
+body:not(.dark-mode) #timeInValue,
+body:not(.dark-mode) #timeOutValue {
+    color: #ffffff !important;
+    font-weight: 800;
+}
+
+/* ATTENDANCE HISTORY TABLE */
+body:not(.dark-mode) .staff-page-table-wrap {
+    background: rgba(0, 38, 16, 0.92) !important;
+    border: 1px solid rgba(255,255,255,0.18) !important;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+body:not(.dark-mode) .staff-page-table {
+    background: transparent !important;
+    color: #ffffff !important;
+}
+
+/* TABLE HEADER - MY ORDERS GREEN */
+body:not(.dark-mode) .staff-page-table thead,
+body:not(.dark-mode) .staff-page-table th {
+    background: #234d2e !important;
+    color: #ffffff !important;
+}
+
+/* TABLE ROWS */
+body:not(.dark-mode) .staff-page-table tbody,
+body:not(.dark-mode) .staff-page-table tbody tr,
+body:not(.dark-mode) .staff-page-table td {
+    background: rgba(0, 38, 16, 0.75) !important;
+    color: #ffffff !important;
+}
+
+/* TABLE HOVER */
+body:not(.dark-mode) .staff-page-table tbody tr:hover td {
+    background: #16452a !important;
+}
+
+/* TABLE BORDERS */
+body:not(.dark-mode) .staff-page-table th,
+body:not(.dark-mode) .staff-page-table td {
+    border-bottom: 1px solid rgba(255,255,255,0.13) !important;
+}
+
+/* CLOCK IN BUTTON */
+body:not(.dark-mode) #clockInButton {
+    background: #19e51b !important;
+    color: #071b0b !important;
+}
+
+/* CLOCK OUT AND REFRESH */
+body:not(.dark-mode) #clockOutButton,
+body:not(.dark-mode) #refreshAttendanceButton {
+    background: rgba(255,255,255,0.12) !important;
+    border: 1px solid rgba(255,255,255,0.20) !important;
+    color: #ffffff !important;
+}
+
+/* DISABLED BUTTONS */
+body:not(.dark-mode) .staff-page-button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+/* STATUS MESSAGE */
+body:not(.dark-mode) .staff-page-message {
+    color: #d5e6d9 !important;
+}
+
+body:not(.dark-mode) .staff-page-message.success {
+    color: #6aff8b !important;
+}
+
+body:not(.dark-mode) .staff-page-message.error {
+    color: #ff9999 !important;
+}
